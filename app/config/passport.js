@@ -18,13 +18,16 @@ passport.use(new LocalStrategy({
                  if (user != null) {
                    return user.comparePassword(password,(err,isMatch)=>{
                      if(!isMatch){
+                       console.log({message: 'Incorrect email or password.'});
                        return callb(null, false, {message: 'Incorrect email or password.'});
                      }
                      else{
+                       console.log({message: 'Logged In Successfully.'});
                        return callb(null, user.toJSON(), {message: 'Logged In Successfully'});
                      }
                    });
                  }
+                 console.log({message: 'Incorrect email or password.'});
                  return callb(null, false, {message: 'Incorrect email or password.'});
             })
             .catch(err => callb(err));
@@ -36,8 +39,9 @@ passport.use(new JWTStrategy({
         secretOrKey   : 'your_jwt_secret'
     },
     function (jwtPayload, cb) {
+        console.log(jwtPayload._id)
         //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
-        return User.findOne({id:jwtPayload.id})
+        User.findOne({'_id':jwtPayload._id.toString()})
             .then(user => {
                 return cb(null, user);
             })

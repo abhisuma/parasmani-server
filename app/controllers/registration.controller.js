@@ -15,6 +15,12 @@ exports.signUp = (req,res) => {
     password:data.password,
   })
 
-  newUser.save()
-  return res.send("Signed Up successfully");
+  newUser.save().then((value) => {
+    console.log("Signed Up successfully");
+    return res.send("Signed Up successfully");
+  },(value) => {
+    console.log("Signed Up failed");
+    return res.send("Signed Up failed");
+  })
+
 }
