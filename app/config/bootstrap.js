@@ -8,7 +8,7 @@ require('../models');
 require('./passport');
 
 const qa = mongoose.model("Questions");
-
+const l=mongoose.model("Exams");
 
 const p = qa({
   title: 'question title',
@@ -22,7 +22,19 @@ const p = qa({
 })
 
 p.save();
-qa.find({},(error,user)=>{
+const t= l({
+  domain: "sfdsfdf",
+  questionPapers:[
+    {
+      language: 'English',
+      sets:{
+        A:[p]
+      }
+    }
+  ]
+})
+t.save();
+l.find({},(error,user)=>{
   console.log(user);
 })
 
