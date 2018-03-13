@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
-
+var options = { discriminatorKey: 'kind' };
 const UserSchema = new Schema({
   firstname: String,
   lastname: String,
@@ -11,7 +11,7 @@ const UserSchema = new Schema({
   mobile:String,
   userId:String,
   password:String,
-})
+},options)
 
 UserSchema.pre('save',function(next) {
     const user = this;
