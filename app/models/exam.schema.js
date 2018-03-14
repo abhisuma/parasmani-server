@@ -14,7 +14,7 @@ const questionpaperschema = new schema({
 })
 
 const examschema =new schema({
-  date: Date,
+  date: String,
   domain: String,
   questionPapers: [questionpaperschema]
 })
