@@ -7,7 +7,7 @@ mongoose.connect(`mongodb://localhost:27017`);
 require('../models');
 require('./passport');
 
-const qa = mongoose.model("Questions");
+/*const qa = mongoose.model("Questions");
 const l=mongoose.model("Exams");
 
 const p = qa({
@@ -36,7 +36,7 @@ const t= l({
 t.save();
 l.find({},(error,user)=>{
   console.log(user);
-})
+})*/
 
 module.exports = {
   mongoose,

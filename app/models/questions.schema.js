@@ -9,10 +9,6 @@ var questionSchema = new schema({
     B: String,
     C: String,
     D: String
-  },
-  answer:{
-    type: String,
-    enum: ['A','B','C','D']
   }
 });
 

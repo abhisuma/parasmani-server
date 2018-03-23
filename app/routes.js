@@ -16,5 +16,7 @@ router.post('/signup/questionAdder',Middlewares.jsonParser,Controllers.registrat
 router.post('/signup/collaborator',Middlewares.jsonParser,Controllers.registrationController.signUpCollaborator);
 
 router.post('/exams',Middlewares.jsonParser,Controllers.examController.addExam);
+router.get('/questions',Controllers.questionController.addQuestions);
+router.put('/exams/addQuestionPaper',Middlewares.jsonParser,Controllers.questionpaperController.addpaper);
 
 module.exports = router;
