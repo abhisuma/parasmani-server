@@ -9,10 +9,26 @@ exports.addpaper =(req,res) => {
   const newquestion_paper = question_paper({
     language : data.language
   })
+  var id = req.params.id;
+  const answerkey = mongoose.model('Answerkey');
+  const newanswerkey= answerkey({
+    questionPaperId:newquestion_paper._id
+  })
+  exam.findByIdAndUpdate(
+ id,
+ { $push: {"question_papers":newquestion_paper}},
+ {  safe: true, upsert: true},
+   function(err, model) {
+     if(err){
+      console.log(err);
+      return res.send(err);
+     }
+      return res.json(model);
+  });
 
   exam.findByIdAndUpdate(
- "5ab3f56326fa091c96043dd3",
- { $push: {"question_papers":newquestion_paper}},
+ id,
+ { $push: {"answerkey":newanswerkey}},
  {  safe: true, upsert: true},
    function(err, model) {
      if(err){

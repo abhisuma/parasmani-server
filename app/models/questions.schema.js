@@ -5,10 +5,10 @@ const schema = mongoose.Schema;
 var questionSchema = new schema({
   title: String,
   options: {
-    A: String,
-    B: String,
-    C: String,
-    D: String
+    A: {value:String,id:{type:Number,default:1}},
+    B: {value:String,id:{type:Number,default:2}},
+    C: {value:String,id:{type:Number,default:3}},
+    D: {value:String,id:{type:Number,default:4}},
   }
 });
 

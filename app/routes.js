@@ -16,7 +16,8 @@ router.post('/signup/questionAdder',Middlewares.jsonParser,Controllers.registrat
 router.post('/signup/collaborator',Middlewares.jsonParser,Controllers.registrationController.signUpCollaborator);
 
 router.post('/exams',Middlewares.jsonParser,Controllers.examController.addExam);
-router.get('/questions',Controllers.questionController.addQuestions);
-router.put('/exams/addQuestionPaper',Middlewares.jsonParser,Controllers.questionpaperController.addpaper);
-
+router.put('/questions/:id',Middlewares.jsonParser,Controllers.questionController.addQuestions);
+router.put('/exams/addQuestionPaper/:id',Middlewares.jsonParser,Controllers.questionpaperController.addpaper);
 module.exports = router;
+//5ab94284c5961d121c9ec97b
+//5ab943afc5961d121c9ec97c

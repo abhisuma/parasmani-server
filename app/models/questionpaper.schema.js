@@ -6,12 +6,10 @@ const questionpaperschema = new schema({
   exam_name: String,
   language: String,
   //set for each difficulty
-  sets: {
     A: [questionschema],
     B: [questionschema],
     C: [questionschema],
     D: [questionschema]
-  }
 })
 
 
