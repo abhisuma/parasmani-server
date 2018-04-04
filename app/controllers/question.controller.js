@@ -9,22 +9,21 @@ exports.addQuestions =(req,res) => {
   const data = req.body;
   const question = mongoose.model('Questions');
   const newquestion = question({
-    title: data.title,
+    title: data.question,
     subject: data.subject,
     options: {
-      A: {value: data.Aoption},
-      B: {value: data.Boption},
-      C: {value: data.Coption},
-      D: {value: data.Doption}
+      A: {value: data.opt1},
+      B: {value: data.opt2},
+      C: {value: data.opt3},
+      D: {value: data.opt4}
     }
   })
 
-  var id = req.params.id;
 
 
   if(data.set==="A"){
-    questionpaper.findByIdAndUpdate(
-   id,
+    questionpaper.findOneAndUpdate(
+   {"language" : data.language},
    { $push: {"A" :newquestion}},
    {  safe: true, upsert: true},
      function(err, model) {
@@ -37,8 +36,8 @@ exports.addQuestions =(req,res) => {
 }
 
 else if(data.set==="B"){
-  questionpaper.findByIdAndUpdate(
- id,
+  questionpaper.findOneAndUpdate(
+ {"language" : data.language},
  { $push: {"B" :newquestion}},
  {  safe: true, upsert: true},
    function(err, model) {
@@ -50,8 +49,8 @@ else if(data.set==="B"){
   });
 }
 else if(data.set==="C"){
-  questionpaper.findByIdAndUpdate(
- id,
+  questionpaper.findOneAndUpdate(
+ {"language" : data.language},
  { $push: {"C" :newquestion}},
  {  safe: true, upsert: true},
    function(err, model) {
@@ -63,8 +62,8 @@ else if(data.set==="C"){
   });
 }
 else{
-  questionpaper.findByIdAndUpdate(
- id,
+  questionpaper.findOneAndUpdate(
+ {"language" : data.language},
  { $push: {"D" :newquestion}},
  {  safe: true, upsert: true},
    function(err, model) {
@@ -76,7 +75,7 @@ else{
   });
 }
 
-answerkey.findOneAndUpdate({"questionPaperId": id}, {$push:{"answers":{"question_id":newquestion._id,"answer_id":data.answer}}},{  safe: true, upsert: true},function(err, doc){
+answerkey.findOneAndUpdate({"questionPaperId": id}, {$push:{"answers":{"question_id":newquestion._id,"answer_id":data.correct}}},{  safe: true, upsert: true},function(err, doc){
     if(err){
         console.log("Something wrong when updating data!");
     }

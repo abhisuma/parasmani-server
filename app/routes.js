@@ -20,6 +20,13 @@ router.put('/questions/:id',Middlewares.jsonParser,Controllers.questionControlle
 router.put('/exams/addQuestionPaper/:id',Middlewares.jsonParser,Controllers.questionpaperController.addpaper);
 router.put('/exams/addBatches/:id',Middlewares.jsonParser,Controllers.examController.addBatches);
 router.get('/exams',Controllers.examController.getExam);
+
+
+router.get('/subjects',Controllers.examController.getSubjects);
+router.get('/languages',Controllers.examController.getLanguages);
+router.get('/batches',Controllers.examController.getBatches);
+
+
 module.exports = router;
 //5ab94284c5961d121c9ec97b
 //5ab943afc5961d121c9ec97c

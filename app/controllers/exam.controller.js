@@ -13,6 +13,61 @@ exports.getExam=(req,res)=>{
     });
 }
 
+
+exports.getSubjects=(req,res)=>{
+  const Exam = mongoose.model('Exams');
+  Exam.findOne({},'subjects',function(err, model) {
+       if(err){
+        console.log(err);
+        return res.send(err);
+       }
+       var ar=[];
+       model.forEach(function(value){
+         ar.push(value.title);
+       });
+       res.send(ar);
+    });
+}
+
+
+exports.getLanguages=(req,res)=>{
+  const Exam = mongoose.model('Exams');
+  Exam.findOne({},'question_paper',function(err, model) {
+    if(err){
+     console.log(err);
+     return res.send(err);
+    }
+    var ar=[];
+    model.forEach(function(value){
+      ar.push(value.language);
+    });
+    res.send(ar);
+ });
+}
+
+
+exports.getBatches=(req,res)=>{
+  const Exam = mongoose.model('Exams');
+  Exam.findOne({},'batches',function(err, model) {
+    if(err){
+     console.log(err);
+     return res.send(err);
+    }
+    var ar=[];
+    model.forEach(function(value){
+      ar.push(value.batch_number);
+    });
+    res.send(ar);
+ });
+}
+
+
+
+
+
+
+
+
 exports.addExam =(req,res) => {
   const data = req.body;
   console.log(data);

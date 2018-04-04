@@ -12,7 +12,7 @@ const examschema =new schema({
   batches : [batchschema],
   instruction: String,
   subjects:[{
-  titile: String,
+  title: String,
   num_in_set_A: Number,
   num_in_set_B: Number,
   num_in_set_C: Number,
