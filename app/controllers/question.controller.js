@@ -10,7 +10,7 @@ exports.addQuestions =(req,res) => {
   const question = mongoose.model('Questions');
   const newquestion = question({
     title: data.title,
-    subject: data.subject
+    subject: data.subject,
     options: {
       A: {value: data.Aoption},
       B: {value: data.Boption},
