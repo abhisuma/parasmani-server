@@ -76,12 +76,20 @@ exports.addExam =(req,res) => {
     exam_name : data.name,
     instruction : data.instruction
   })
+  // newExam.save().then((value) => {
+  //   console.log("Exam created successfully");
+  //   return res.send("Exam created successfully");
+  // },(value) => {
+  //   console.log(value);
+  //   return res.send("Signed Up failed");
+  // })
+  let id = newExam._id;
+
   data.languages.forEach(function(value){
     const question_paper = mongoose.model('Question_papers');
     const newquestion_paper = question_paper({
-      language : value
+      language : value.title
     })
-    var id = newExam._id;
     const answerkey = mongoose.model('Answerkey');
     const newanswerkey= answerkey({
       questionPaperId:newquestion_paper._id
@@ -93,9 +101,7 @@ exports.addExam =(req,res) => {
      function(err, model) {
        if(err){
         console.log(err);
-        return res.send(err);
        }
-        return res.json(model);
     });
 
     Exam.findByIdAndUpdate(
@@ -105,20 +111,19 @@ exports.addExam =(req,res) => {
      function(err, model) {
        if(err){
         console.log(err);
-        return res.send(err);
        }
-        return res.json(model);
     });
   });
   const batch = mongoose.model('Batches');
 
   data.batches.forEach(function(value){
     const newbatch= batch({
-      batch_number: value.key,
+      // batch_number: value.key,
       start_time: value.start,
       duration: value.duration  //enter duration in minutes
 //      number_of_students: Number
     })
+    console.log(newbatch)
     Exam.findByIdAndUpdate(
    id,
    { $push: {"batches":newbatch}},
@@ -126,9 +131,7 @@ exports.addExam =(req,res) => {
      function(err, model) {
        if(err){
         console.log(err);
-        return res.send(err);
        }
-        return res.json(model);
     });
   })
 
@@ -147,21 +150,13 @@ data.subjects.forEach(function(value){
    function(err, model) {
      if(err){
       console.log(err);
-      return res.send(err);
      }
-      return res.json(model);
   });
 })
 
+// console.log(newExam)
 
 
-  newExam.save().then((value) => {
-    console.log("Exam created successfully");
-    return res.send("Exam created successfully");
-  },(value) => {
-    console.log("Signed Up failed");
-    return res.send("Signed Up failed");
-  })
 
 }
 
