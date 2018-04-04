@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const batch = mongoose.model('Batches');
 
 exports.getExam=(req,res)=>{
   const Exam = mongoose.model('Exams');
@@ -106,11 +107,11 @@ exports.addExam =(req,res) => {
        }
     });
   });
-  const batch = mongoose.model('Batches');
+
 
   data.batches.forEach(function(value){
     const newbatch= batch({
-      // batch_number: value.key,
+      batch_number: value.key,
       start_time: value.start,
       duration: value.duration  //enter duration in minutes
 //      number_of_students: Number

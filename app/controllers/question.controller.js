@@ -18,70 +18,40 @@ exports.addQuestions =(req,res) => {
       D: {value: data.opt4}
     }
   })
+  data.language = "english"
+
+  let pushData =
+  (data.difficulty == 'A' ? {'A' :newquestion} : data.difficulty == 'B' ? {'B' :newquestion} : data.difficulty == 'C' ? {'C' :newquestion} : {'D' :newquestion} )
+
+  exam.question_papers.findOne({"language":data.language}
+).then((ex) => {
+    console.log(ex)
+  })
 
 
+  //   console.log(data.language)
+  // questionpaper.findOneAndUpdate(
+  //  {"language" : data.language},
+  //  { $push: pushData},
+  //  {  safe: true, upsert: true},
+  //    function(err, model) {
+  //      if(err){
+  //       console.log(err);
+  //      }
+  // }).then((val)=>{
+  //   answerkey.findOneAndUpdate({"questionPaperId": val['_id']}, {$push:{"answers":{"question_id":newquestion._id,"answer_id":data.correct}}},{  safe: true, upsert: true},function(err, doc){
+  //       if(err){
+  //           console.log("Something wrong when updating data!");
+  //       }
+  //       console.log(doc);
+  //       res.send("done");
+  //   }).then((t) => {
+  //     console.log(val)
+  //   })
+  //
+  // })
 
-  if(data.set==="A"){
-    questionpaper.findOneAndUpdate(
-   {"language" : data.language},
-   { $push: {"A" :newquestion}},
-   {  safe: true, upsert: true},
-     function(err, model) {
-       if(err){
-        console.log(err);
-  //      return res.send(err);
-       }
-      //  return res.json(model);
-    });
-}
+  //   // console.log(qp)
 
-else if(data.set==="B"){
-  questionpaper.findOneAndUpdate(
- {"language" : data.language},
- { $push: {"B" :newquestion}},
- {  safe: true, upsert: true},
-   function(err, model) {
-     if(err){
-      console.log(err);
-//      return res.send(err);
-     }
-//      return res.json(model);
-  });
-}
-else if(data.set==="C"){
-  questionpaper.findOneAndUpdate(
- {"language" : data.language},
- { $push: {"C" :newquestion}},
- {  safe: true, upsert: true},
-   function(err, model) {
-     if(err){
-      console.log(err);
-      //return res.send(err);
-     }
-      //return res.json(model);
-  });
-}
-else{
-  questionpaper.findOneAndUpdate(
- {"language" : data.language},
- { $push: {"D" :newquestion}},
- {  safe: true, upsert: true},
-   function(err, model) {
-     if(err){
-      console.log(err);
-//    return res.send(err);
-     }
-//      return res.json(model);
-  });
-}
-
-answerkey.findOneAndUpdate({"questionPaperId": id}, {$push:{"answers":{"question_id":newquestion._id,"answer_id":data.correct}}},{  safe: true, upsert: true},function(err, doc){
-    if(err){
-        console.log("Something wrong when updating data!");
-    }
-
-    console.log(doc);
-    res.send("done");
-});
 
 }
