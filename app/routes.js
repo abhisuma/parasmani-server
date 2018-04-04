@@ -18,6 +18,8 @@ router.post('/signup/collaborator',Middlewares.jsonParser,Controllers.registrati
 router.post('/exams',Middlewares.jsonParser,Controllers.examController.addExam);
 router.put('/questions/:id',Middlewares.jsonParser,Controllers.questionController.addQuestions);
 router.put('/exams/addQuestionPaper/:id',Middlewares.jsonParser,Controllers.questionpaperController.addpaper);
+router.put('/exams/addBatches/:id',Middlewares.jsonParser,Controllers.examController.addBatches);
+router.get('/exams',Controllers.ho);
 module.exports = router;
 //5ab94284c5961d121c9ec97b
 //5ab943afc5961d121c9ec97c

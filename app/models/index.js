@@ -1,5 +1,6 @@
 module.exports = require('./user.schema');
 module.exports = require('./questionadder.schema');
+module.exports = require('./batch.schema.js');
 module.exports = require('./answerkey.schema.js');
 module.exports = require('./questions.schema.js');
 module.exports = require('./questionpaper.schema.js');
@@ -8,3 +9,4 @@ module.exports = require('./student.schema.js');
 module.exports = require('./admin.schema.js');
 module.exports = require('./collaborator.schema.js');
 module.exports= require('./answer.schema.js');
+module.exports = require('./response.schema.js');

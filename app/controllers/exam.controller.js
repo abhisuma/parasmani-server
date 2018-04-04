@@ -2,6 +2,17 @@
 
 const mongoose = require('mongoose');
 
+exports.getExam=(req,res)=>{
+  const Exam = mongoose.model('Exams');
+  Exam.findOne({},'exam_name batches instruction subjects question_papers',function(err, model) {
+       if(err){
+        console.log(err);
+        return res.send(err);
+       }
+        return res.json(model);
+    });
+}
+
 exports.addExam =(req,res) => {
   const data = req.body;
   const Exam = mongoose.model('Exams');
@@ -22,4 +33,28 @@ exports.addExam =(req,res) => {
     return res.send("Signed Up failed");
   })
 
+}
+
+exports.addBatches =(req,res) => {
+  const data = req.body;
+  const batch = mongoose.model('Batches');
+  const newbatch = batch({
+    batchname: data.name,
+    date: data.date,
+    start_time: data.start_time,
+    end_time: data.end_time,
+    number_of_students: data.number_of_students
+  });
+  var id = req.params.id;
+  exam.findByIdAndUpdate(
+ id,
+ { $push: {"batches":newbatch}},
+ {  safe: true, upsert: true},
+   function(err, model) {
+     if(err){
+      console.log(err);
+      return res.send(err);
+     }
+      return res.json(model);
+  });
 }

@@ -10,29 +10,30 @@ exports.addQuestions =(req,res) => {
   const question = mongoose.model('Questions');
   const newquestion = question({
     title: data.title,
+    subject: data.subject
     options: {
-      A: data.Aoption,
-      B: data.Boption,
-      C: data.Coption,
-      D: data.Doption
+      A: {value: data.Aoption},
+      B: {value: data.Boption},
+      C: {value: data.Coption},
+      D: {value: data.Doption}
     }
   })
 
   var id = req.params.id;
 
 
-if(data.set==="A"){
-  questionpaper.findByIdAndUpdate(
- id,
- { $push: {"A" :newquestion}},
- {  safe: true, upsert: true},
-   function(err, model) {
-     if(err){
-      console.log(err);
-//      return res.send(err);
-     }
-    //  return res.json(model);
-  });
+  if(data.set==="A"){
+    questionpaper.findByIdAndUpdate(
+   id,
+   { $push: {"A" :newquestion}},
+   {  safe: true, upsert: true},
+     function(err, model) {
+       if(err){
+        console.log(err);
+  //      return res.send(err);
+       }
+      //  return res.json(model);
+    });
 }
 
 else if(data.set==="B"){

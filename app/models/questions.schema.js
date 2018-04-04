@@ -4,6 +4,7 @@ const schema = mongoose.Schema;
 
 var questionSchema = new schema({
   title: String,
+  subject: String,
   options: {
     A: {value:String,id:{type:Number,default:1}},
     B: {value:String,id:{type:Number,default:2}},

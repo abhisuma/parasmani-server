@@ -6,7 +6,9 @@ const Schema = mongoose.Schema;
 var options = { discriminatorKey: 'kind' };
 
 const studentSchema = new Schema({
-  institute: String
+  institute: String,
+  exam_id: String,
+  batch_name: String
 },options);
 
 module.exports = User.discriminator('student',studentSchema);
