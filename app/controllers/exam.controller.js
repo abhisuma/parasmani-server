@@ -22,8 +22,8 @@ exports.getSubjects=(req,res)=>{
         return res.send(err);
        }
        var ar=[];
-       model.forEach(function(value){
-         ar.push(value.title);
+       model['subjects'].forEach(function(value){
+         ar.push(value);
        });
        res.send(ar);
     });
@@ -32,19 +32,18 @@ exports.getSubjects=(req,res)=>{
 
 exports.getLanguages=(req,res)=>{
   const Exam = mongoose.model('Exams');
-  Exam.findOne({},'question_paper',function(err, model) {
+  Exam.findOne({},'question_papers',function(err, model) {
     if(err){
      console.log(err);
      return res.send(err);
     }
     var ar=[];
-    model.forEach(function(value){
+    model['question_papers'].forEach(function(value){
       ar.push(value.language);
     });
     res.send(ar);
  });
 }
-
 
 exports.getBatches=(req,res)=>{
   const Exam = mongoose.model('Exams');
@@ -54,19 +53,12 @@ exports.getBatches=(req,res)=>{
      return res.send(err);
     }
     var ar=[];
-    model.forEach(function(value){
-      ar.push(value.batch_number);
+    model['batches'].forEach(function(value){
+      ar.push(value);
     });
     res.send(ar);
  });
 }
-
-
-
-
-
-
-
 
 exports.addExam =(req,res) => {
   const data = req.body;
@@ -153,21 +145,8 @@ data.subjects.forEach(function(value){
      }
   });
 })
-
 // console.log(newExam)
-
-
-
 }
-
-
-
-
-
-
-
-
-
 
 exports.addBatches =(req,res) => {
   const data = req.body;
