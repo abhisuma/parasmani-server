@@ -15,16 +15,91 @@ exports.getExam=(req,res)=>{
 
 exports.addExam =(req,res) => {
   const data = req.body;
+  console.log(data);
   const Exam = mongoose.model('Exams');
   const newExam = Exam({
     exam_name : data.name,
-    date : data.date,
-    instruction : data.instruction,
-    num_in_set_A: data.setA,
-    num_in_set_B: data.setB,
-    num_in_set_C: data.setC,
-    num_in_set_D: data.setD,
+    instruction : data.instruction
   })
+  data.languages.forEach(function(value){
+    const question_paper = mongoose.model('Question_papers');
+    const newquestion_paper = question_paper({
+      language : value
+    })
+    var id = newExam._id;
+    const answerkey = mongoose.model('Answerkey');
+    const newanswerkey= answerkey({
+      questionPaperId:newquestion_paper._id
+    })
+    Exam.findByIdAndUpdate(
+   id,
+   { $push: {"question_papers":newquestion_paper}},
+   {  safe: true, upsert: true},
+     function(err, model) {
+       if(err){
+        console.log(err);
+        return res.send(err);
+       }
+        return res.json(model);
+    });
+
+    Exam.findByIdAndUpdate(
+   id,
+   { $push: {"answerkey":newanswerkey}},
+   {  safe: true, upsert: true},
+     function(err, model) {
+       if(err){
+        console.log(err);
+        return res.send(err);
+       }
+        return res.json(model);
+    });
+  });
+  const batch = mongoose.model('Batches');
+
+  data.batches.forEach(function(value){
+    const newbatch= batch({
+      batch_number: value.key,
+      start_time: value.start,
+      duration: value.duration  //enter duration in minutes
+//      number_of_students: Number
+    })
+    Exam.findByIdAndUpdate(
+   id,
+   { $push: {"batches":newbatch}},
+   {  safe: true, upsert: true},
+     function(err, model) {
+       if(err){
+        console.log(err);
+        return res.send(err);
+       }
+        return res.json(model);
+    });
+  })
+
+data.subjects.forEach(function(value){
+  var subject = {
+    title : value.title,
+    num_in_set_A: value.NoQA,
+    num_in_set_B: value.NoQB,
+    num_in_set_C: value.NoQC,
+    num_in_set_D: value.NoQD
+  }
+  Exam.findByIdAndUpdate(
+ id,
+ { $push: {"subjects":subject}},
+ {  safe: true, upsert: true},
+   function(err, model) {
+     if(err){
+      console.log(err);
+      return res.send(err);
+     }
+      return res.json(model);
+  });
+})
+
+
+
   newExam.save().then((value) => {
     console.log("Exam created successfully");
     return res.send("Exam created successfully");
@@ -34,6 +109,15 @@ exports.addExam =(req,res) => {
   })
 
 }
+
+
+
+
+
+
+
+
+
 
 exports.addBatches =(req,res) => {
   const data = req.body;
