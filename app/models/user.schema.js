@@ -5,12 +5,7 @@ const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
 var options = { discriminatorKey: 'kind' };
 const UserSchema = new Schema({
-  firstname: String,
-  lastname: String,
-  email:String,
-  mobile:String,
-  userId:String,
-  password:String,
+
 },options)
 
 UserSchema.pre('save',function(next) {

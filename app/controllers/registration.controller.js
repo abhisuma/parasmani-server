@@ -7,24 +7,24 @@ exports.signUpStudent = (req,res) => {
   const data = req.body;
   const User = mongoose.model('student');
   const newUser = User({
-    firstname: this.firstName,
-    middlename: this.middleName,
-    lastname: this.lastName,
-    gender: this.gender,
-    batch: this.batch,
-    aadharNo: this.aadharNo,
-    contactNo: this.contactNo,
-    email: this.email,
-    eduQuali: this.eduQuali,
-    marStats: this.marStats,
-    jobExp: this.jobExp,
-    caste: this.caste,
-    category: this.category,
-    income: this.income,
-    incomeCard:this.incomeCard,
-    religion: this.religion,
-    nationality: this.nationality,
-    password: this.password
+    firstname: data.firstName,
+    middlename: data.middleName,
+    lastname: data.lastName,
+    gender: data.gender,
+    batch: data.batch,
+    aadharNo: data.aadharNo,
+    contactNo: data.contactNo,
+    email: data.email,
+    eduQuali: data.eduQuali,
+    marStats: data.marStats,
+    jobExp: data.jobExp,
+    caste: data.caste,
+    category: data.category,
+    income: data.income,
+    incomeCard:data.incomeCard,
+    religion: data.religion,
+    nationality: data.nationality,
+    password: data.password
   })
 
   newUser.save().then((value) => {
