@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 var answerkeyschema = new schema({
-  questionPaperId: String,
+  language: String,
   answers : {question_id:String,answer_id:Number}
 });
 

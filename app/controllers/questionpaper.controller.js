@@ -12,7 +12,7 @@ exports.addpaper =(req,res) => {
   var id = req.params.id;
   const answerkey = mongoose.model('Answerkey');
   const newanswerkey= answerkey({
-    questionPaperId:newquestion_paper._id
+    language:newquestion_paper.language
   })
   exam.findByIdAndUpdate(
  id,

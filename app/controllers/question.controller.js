@@ -18,15 +18,34 @@ exports.addQuestions =(req,res) => {
       D: {value: data.opt4}
     }
   })
-  data.language = "english"
+
+  var newanswer ={
+      question_id:newquestion._id,
+      answer_id:data.correct
+    };
+
 
   let pushData =
-  (data.difficulty == 'A' ? {'A' :newquestion} : data.difficulty == 'B' ? {'B' :newquestion} : data.difficulty == 'C' ? {'C' :newquestion} : {'D' :newquestion} )
+  (data.difficulty == 'A' ? {'question_papers.$.A' :newquestion} : data.difficulty == 'B' ? {'question_papers.$.B' :newquestion} : data.difficulty == 'C' ? {'question_papers.$.C' :newquestion} : {'question_papers.$.D' :newquestion} )
 
-  exam.question_papers.findOne({"language":data.language}
-).then((ex) => {
-    console.log(ex)
-  })
+  exam.findOne({}).then((ex) => {
+    console.log(ex);
+    var id = ex._id;
+    exam.update({_id : id,"question_papers.language" : data.language},
+      {$push : pushData},{upsert: true}, function(err, docs){
+//        res.json(docs);
+//        console.log(docs);
+        });
+    exam.update({_id : id,"answerkey.language" : data.language},
+      {$push : {'answerkey.$.answers' : newanswer}},{upsert: true}, function(err, docs){
+        res.json(docs);
+    //        console.log(docs);
+        });
+    });
+
+
+
+
 
 
   //   console.log(data.language)
