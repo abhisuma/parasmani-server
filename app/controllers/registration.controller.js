@@ -50,7 +50,7 @@ exports.signUpAdmin = (req,res) => {
   })
 
   newUser.save().then((value) => {
-    console.log("Signed Up successfully");
+    console.log(value);
     return res.send("Signed Up successfully");
   },(value) => {
     console.log(value);
