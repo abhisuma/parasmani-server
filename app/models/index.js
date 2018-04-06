@@ -10,3 +10,4 @@ module.exports = require('./admin.schema.js');
 module.exports = require('./collaborator.schema.js');
 module.exports= require('./answer.schema.js');
 module.exports = require('./response.schema.js');
+module.exports = require('./result.schema.js');

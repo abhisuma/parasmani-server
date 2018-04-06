@@ -83,12 +83,9 @@ exports.addExam =(req,res) => {
 
   newExam.save().then((value) => {
     console.log("Exam created successfully");
+    let id = newExam._id;
     // return res.send("Exam created successfully");
-  },(value) => {
-    console.log(value);
-    // return res.send("Signed Up failed");
-  })
-  let id = newExam._id;
+
 
   data.languages.forEach(function(value){
     const question_paper = mongoose.model('Question_papers');
@@ -158,7 +155,10 @@ data.subjects.forEach(function(value){
      }
   });
 })
+return res.send(newExam);
+});
 // console.log(newExam)
+
 }
 
 exports.addBatches =(req,res) => {
