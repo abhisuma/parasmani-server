@@ -8,7 +8,7 @@ exports.addResponse = (req,res) =>{
   const response = mongoose.model('responses');
   const newresponse = response({
     student_id: data.Student_id,
-    questionPaperId: data.questionpaper_id,
+    language: data.language,
     answer : data.responses
   });
   newresponse.save().then((value) => {
