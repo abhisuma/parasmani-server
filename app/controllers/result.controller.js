@@ -11,19 +11,20 @@ const result=mongoose.model('results');
 //   })
 // }
 
-function questionChecker(language,question_id,response){
-  if(response==0)
-    return 0;
+function questionChecker(language,question_id,response,cb){
+  if(response==0){
+    cb(0)
+  }
   exam.find({},function(err,doc){
     doc.answerkey.forEach(function(item){
       if(item.language==language){
         item.answers.forEach(function(value){
           if(value.question_id==question_id){
             if(value.answer_id==response){
-              return 1;
+              cb(1)
             }
             else {
-              return -1;
+              cb(-1)
             }
           }
         })
@@ -42,21 +43,23 @@ response.find({},function(err,responses){
     })
     newResult.save().then((err,model) => {
         value.answer.forEach(function(item){
-          var answer = {
-            question_id: item.question_id,
-            correct: questionChecker(value.language,item.question_id,item.response),
-            set: item.set
-          }
-          var id = newResult._id;
-          result.findByIdAndUpdate(
-            id,
-            { $push: {"answer":answer}},
-            {  safe: true, upsert: true},
+          questionChecker(value.language,item.question_id,item.response,(corr) => {
+            var answer = {
+              question_id: item.question_id,
+              correct: corr,
+              set: item.set
+            }
+            var id = newResult._id;
+            result.findByIdAndUpdate(
+              id,
+              { $push: {"answer":answer}},
+              {  safe: true, upsert: true},
               function(err, model) {
                 if(err){
-                 console.log(err);
+                  console.log(err);
                 }
               })
+          })
         })
 
     })
