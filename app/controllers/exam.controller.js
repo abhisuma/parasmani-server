@@ -94,7 +94,7 @@ exports.addExam =(req,res) => {
     })
     const answerkey = mongoose.model('Answerkey');
     const newanswerkey= answerkey({
-      language:newquestion_paper.language
+      language:value.title
     })
     Exam.findOneAndUpdate(
    {},

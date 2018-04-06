@@ -15,21 +15,26 @@ function questionChecker(language,question_id,response,cb){
   if(response==0){
     cb(0)
   }
-  exam.find({},function(err,doc){
-    doc.answerkey.forEach(function(item){
-      if(item.language==language){
-        item.answers.forEach(function(value){
-          if(value.question_id==question_id){
-            if(value.answer_id==response){
-              cb(1)
-            }
-            else {
-              cb(-1)
-            }
-          }
-        })
-      }
-    })
+  exam.findOne({},function(err,doc){
+    if(doc){
+      doc.answerkey.forEach(function(item){
+        console.log(item.answers)
+        if(item.language==language){
+          item.answers.forEach((val) => {
+          })
+            // if(value.question_id==question_id){
+            //   if(value.answer_id==response){
+            //     cb(1)
+            //   }
+            //   else {
+            //     cb(-1)
+            //   }
+            // }
+
+        }
+      })
+    }
+
   })
 }
 
@@ -66,7 +71,7 @@ response.find({},function(err,responses){
 })
 })
 
-
+return res.send("done");
   // exam.findOne({},function(err,doc){
   //   doc.answerkey.answers.forEach(function(value){
   //     if(value.question_id)
