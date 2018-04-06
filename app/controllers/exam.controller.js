@@ -3,6 +3,16 @@
 const mongoose = require('mongoose');
 const batch = mongoose.model('Batches');
 
+function strToTime (time) {
+  let dd = time.slice(0,2)
+  let mm = time.slice(2,4)
+  let yyyy = time.slice(4,8)
+  let hr = time.slice(8,10)
+  let min = time.slice(10,12)
+  let date = new Date(`${yyyy}-${mm}-${dd}T${hr}:${mm}:00`);
+  console.log(date)
+}
+
 exports.getExam=(req,res)=>{
   const Exam = mongoose.model('Exams');
   Exam.findOne({},'exam_name batches instruction subjects question_papers',function(err, model) {
@@ -68,7 +78,7 @@ exports.addExam =(req,res) => {
   const Exam = mongoose.model('Exams');
   const newExam = Exam({
     exam_name : data.name,
-    instruction : data.instruction
+    instruction : data.instructions
   })
   // newExam.save().then((value) => {
   //   console.log("Exam created successfully");
@@ -113,8 +123,8 @@ exports.addExam =(req,res) => {
   data.batches.forEach(function(value){
     const newbatch= batch({
       batch_number: value.key,
-      start_time: value.start,
-      duration: value.duration  //enter duration in minutes
+      start_time: strToTime(value.start),
+      duration: data.duration  //enter duration in minutes
 //      number_of_students: Number
     })
     console.log(newbatch)
