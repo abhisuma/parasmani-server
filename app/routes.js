@@ -26,6 +26,7 @@ router.get('/subjects',Controllers.examController.getSubjects);
 router.get('/languages',Controllers.examController.getLanguages);
 router.get('/batches',Controllers.examController.getBatches);
 
+router.post('/response',Middlewares.jsonParser,Controllers.responseController.addResponse)
 
 module.exports = router;
 //5ab94284c5961d121c9ec97b
