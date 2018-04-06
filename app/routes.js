@@ -19,7 +19,7 @@ router.post('/addExam',Middlewares.jsonParser,Controllers.examController.addExam
 router.post('/addQuestion',Middlewares.jsonParser,Controllers.questionController.addQuestions);
 router.put('/exams/addQuestionPaper/:id',Middlewares.jsonParser,Controllers.questionpaperController.addpaper);
 router.put('/exams/addBatches/:id',Middlewares.jsonParser,Controllers.examController.addBatches);
-router.get('/exams',Controllers.examController.getExam);
+router.get('/exam',Controllers.examController.getExam);
 
 
 router.get('/subjects',Controllers.examController.getSubjects);
