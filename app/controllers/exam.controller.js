@@ -15,7 +15,7 @@ function strToTime (time) {
 
 exports.getExam=(req,res)=>{
   const Exam = mongoose.model('Exams');
-  Exam.findOne({},'exam_name batches instruction subjects question_papers',function(err, model) {
+  Exam.findOne({},'exam_name batches instruction subjects question_papers duration',function(err, model) {
        if(err){
         console.log(err);
         return res.send(err);
@@ -78,7 +78,7 @@ exports.addExam =(req,res) => {
   const newExam = Exam({
     "exam_name" : data.name,
     "instruction" : data.instructions,
-    "duration": data.duration  //enter duration in minutes
+    "duration": parseInt(data.duration)  //enter duration in minutes
   })
 
   newExam.save().then((value) => {
