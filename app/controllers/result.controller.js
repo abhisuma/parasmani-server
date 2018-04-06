@@ -11,7 +11,7 @@ const result=mongoose.model('results');
 //   })
 // }
 
-function questiontionChecker(language,question_id,response){
+function questionChecker(language,question_id,response){
   if(response==0)
     return 0;
   exam.find({},function(err,doc){
@@ -40,7 +40,7 @@ response.find({},function(err,responses){
       student_id: value.student_id,
       language: value.language
     })
-    newResult.save().then((err,newResult) => {
+    newResult.save().then((err,model) => {
         value.answer.forEach(function(item){
           var answer = {
             question_id: item.question_id,

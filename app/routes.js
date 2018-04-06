@@ -27,6 +27,7 @@ router.get('/languages',Controllers.examController.getLanguages);
 router.get('/batches',Controllers.examController.getBatches);
 
 router.post('/response',Middlewares.jsonParser,Controllers.responseController.addResponse)
+router.get('/generateResults',Middlewares.jsonParser,Controllers.resultController.generateResult)
 
 module.exports = router;
 //5ab94284c5961d121c9ec97b
