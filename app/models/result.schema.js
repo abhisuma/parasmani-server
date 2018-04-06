@@ -3,7 +3,7 @@ const schema = mongoose.Schema;
 
 const resultschema = new schema({
   student_id: String,
-  questionPaperId: String,
+  language: String,
   answer : [{question_id: String,correct: Number,set: String}]
 })
 
