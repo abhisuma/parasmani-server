@@ -11,6 +11,7 @@ const examschema =new schema({
   exam_name: String,
   batches : [batchschema],
   instruction: String,
+  duration: Number,
   subjects:[{
   title: String,
   num_in_set_A: Number,

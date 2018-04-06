@@ -10,7 +10,7 @@ function strToTime (time) {
   let hr = time.slice(8,10)
   let min = time.slice(10,12)
   let date = new Date(`${yyyy}-${mm}-${dd}T${hr}:${mm}:00`);
-  console.log(date)
+  return date
 }
 
 exports.getExam=(req,res)=>{
@@ -74,19 +74,20 @@ exports.getBatches=(req,res)=>{
 
 exports.addExam =(req,res) => {
   const data = req.body;
-  console.log(data);
   const Exam = mongoose.model('Exams');
   const newExam = Exam({
-    exam_name : data.name,
-    instruction : data.instructions
+    "exam_name" : data.name,
+    "instruction" : data.instructions,
+    "duration": data.duration  //enter duration in minutes
   })
-  // newExam.save().then((value) => {
-  //   console.log("Exam created successfully");
-  //   return res.send("Exam created successfully");
-  // },(value) => {
-  //   console.log(value);
-  //   return res.send("Signed Up failed");
-  // })
+
+  newExam.save().then((value) => {
+    console.log("Exam created successfully");
+    // return res.send("Exam created successfully");
+  },(value) => {
+    console.log(value);
+    // return res.send("Signed Up failed");
+  })
   let id = newExam._id;
 
   data.languages.forEach(function(value){
@@ -98,8 +99,8 @@ exports.addExam =(req,res) => {
     const newanswerkey= answerkey({
       language:newquestion_paper.language
     })
-    Exam.findByIdAndUpdate(
-   id,
+    Exam.findOneAndUpdate(
+   {},
    { $push: {"question_papers":newquestion_paper}},
    {  safe: true, upsert: true},
      function(err, model) {
@@ -108,9 +109,11 @@ exports.addExam =(req,res) => {
        }
     });
 
-    Exam.findByIdAndUpdate(
-   id,
-   { $push: {"answerkey":newanswerkey}},
+    Exam.findOneAndUpdate(
+   {},
+   { $push: {
+     "answerkey":newanswerkey,
+ }},
    {  safe: true, upsert: true},
      function(err, model) {
        if(err){
@@ -124,12 +127,10 @@ exports.addExam =(req,res) => {
     const newbatch= batch({
       batch_number: value.key,
       start_time: strToTime(value.start),
-      duration: data.duration  //enter duration in minutes
 //      number_of_students: Number
     })
-    console.log(newbatch)
-    Exam.findByIdAndUpdate(
-   id,
+    Exam.findOneAndUpdate(
+   {},
    { $push: {"batches":newbatch}},
    {  safe: true, upsert: true},
      function(err, model) {
@@ -147,8 +148,8 @@ data.subjects.forEach(function(value){
     num_in_set_C: value.NoQC,
     num_in_set_D: value.NoQD
   }
-  Exam.findByIdAndUpdate(
- id,
+  Exam.findOneAndUpdate(
+ {},
  { $push: {"subjects":subject}},
  {  safe: true, upsert: true},
    function(err, model) {
