@@ -5,16 +5,16 @@ const exam=mongoose.model('Exams');
 const response=mongoose.model('responses');
 const result=mongoose.model('results');
 
-function resultcalculator(student_id,response_id,response){
-  response.find(response._id : response.id,function(err,doc){
-    doc.answer
-  })
-}
+// function resultcalculator(student_id,response_id,response){
+//   response.find(response._id : response.id,function(err,doc){
+//     doc.answer
+//   })
+// }
 
 function questiontionChecker(language,question_id,response){
-  if(response===NULL)
+  if(response==0)
     return 0;
-  exam.find({},function(err,doc)){
+  exam.find({},function(err,doc){
     doc.answerkey.forEach(function(item){
       if(item.language==language){
         item.answers.forEach(function(value){
@@ -29,7 +29,7 @@ function questiontionChecker(language,question_id,response){
         })
       }
     })
-  }
+  })
 }
 
 
@@ -40,7 +40,7 @@ response.find({},function(err,responses){
       student_id: value.student_id,
       language: value.language
     })
-    newResult.save.then((err,newResult) => {
+    newResult.save().then((err,newResult) => {
         value.answer.forEach(function(item){
           var answer = {
             question_id: item.question_id,
@@ -61,7 +61,7 @@ response.find({},function(err,responses){
 
     })
 })
-}
+})
 
 
   // exam.findOne({},function(err,doc){
