@@ -24,7 +24,8 @@ exports.signUpStudent = (req,res) => {
     incomeCard:data.incomeCard,
     religion: data.religion,
     nationality: data.nationality,
-    password: data.password
+    password: data.aadharNo,
+    username:data.aadharNo
   })
 
   newUser.save().then((value) => {
@@ -41,12 +42,8 @@ exports.signUpAdmin = (req,res) => {
   const data = req.body;
   const User = mongoose.model('admin');
   const newUser = User({
-    firstname: data.firstname,
-    lastname: data.lastname,
-    email:data.email,
-    mobile:data.mobile,
-    userId:data.userId,
-    password:data.password,
+    password: data.aadharNo,
+    username:data.aadharNo
   })
 
   newUser.save().then((value) => {

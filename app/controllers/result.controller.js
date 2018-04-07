@@ -47,7 +47,8 @@ response.find({},function(err,responses){
             var answer = {
               question_id: item.question_id,
               correct: corr,
-              set: item.set
+              set: item.set,
+              subject :item.subject
             }
             var id = newResult._id;
             result.findByIdAndUpdate(

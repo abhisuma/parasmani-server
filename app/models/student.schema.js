@@ -10,7 +10,7 @@ const studentSchema = new Schema({
   middlename: String,
   lastname: String,
   gender: String,
-  batch: String,
+  batch: Number,
   aadharNo: String,
   contactNo: String,
   email: String,
@@ -23,7 +23,6 @@ const studentSchema = new Schema({
   incomeCard:String,
   religion: String,
   nationality: String,
-  password: String
 },options);
 
 module.exports = User.discriminator('student',studentSchema);
