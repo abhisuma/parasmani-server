@@ -4,22 +4,22 @@ const student = mongoose.model('student');
 
 const studentAnalyticsSchema=new Schema({
   student_id : {type : Schema.Types.ObjectId, ref:'student'},
-  setA={
+  setA:{
     correct: Number,
     incorrect:Number,
     unattempted:Number
   },
-  setB={
+  setB:{
     correct: Number,
     incorrect:Number,
     unattempted:Number
   },
-  setC={
+  setC:{
     correct: Number,
     incorrect:Number,
     unattempted:Number
   },
-  setD={
+  setD:{
     correct: Number,
     incorrect:Number,
     unattempted:Number
