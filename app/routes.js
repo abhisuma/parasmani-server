@@ -8,17 +8,15 @@ const Controllers = require('./controllers/index');
 router.get('/',Middlewares.auth,Controllers.homeController.index);
 //router.post('/signup',Middlewares.jsonParser,Controllers.registrationController.signUp);
 router.post('/login',Middlewares.jsonParser,Controllers.loginController.login);
+router.post('/login/student',Middlewares.jsonParser,Controllers.loginController.login);
 
 
 router.post('/signup/admin',Middlewares.jsonParser,Controllers.registrationController.signUpAdmin);
 router.post('/signup/student',Middlewares.jsonParser,Controllers.registrationController.signUpStudent);
-router.post('/signup/questionAdder',Middlewares.jsonParser,Controllers.registrationController.signUpQuestionAdder);
-router.post('/signup/collaborator',Middlewares.jsonParser,Controllers.registrationController.signUpCollaborator);
+
 
 router.post('/addExam',Middlewares.jsonParser,Controllers.examController.addExam);
 router.post('/addQuestion',Middlewares.jsonParser,Controllers.questionController.addQuestions);
-router.put('/exams/addQuestionPaper/:id',Middlewares.jsonParser,Controllers.questionpaperController.addpaper);
-router.put('/exams/addBatches/:id',Middlewares.jsonParser,Controllers.examController.addBatches);
 router.get('/exam',Controllers.examController.getExam);
 
 
@@ -28,7 +26,7 @@ router.get('/batches',Controllers.examController.getBatches);
 
 router.post('/response',Middlewares.jsonParser,Controllers.responseController.addResponse)
 router.get('/generateResults',Middlewares.jsonParser,Controllers.resultController.generateResult)
-
+router.get('/studentAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
 module.exports = router;
 //5ab94284c5961d121c9ec97b
 //5ab943afc5961d121c9ec97c

@@ -42,8 +42,8 @@ exports.signUpAdmin = (req,res) => {
   const data = req.body;
   const User = mongoose.model('admin');
   const newUser = User({
-    password: data.aadharNo,
-    username:data.aadharNo
+    password: data.password,
+    username:data.userId
   })
 
   newUser.save().then((value) => {

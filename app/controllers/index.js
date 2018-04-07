@@ -8,6 +8,8 @@ const questionController = require('./question.controller.js');
 const questionpaperController = require('./questionpaper.controller.js');
 const responseController = require('./response.controller.js');
 const resultController = require('./result.controller.js');
+const analyticsController = require('./analytics.controller')
+
 module.exports = {
   homeController,
   registrationController,
@@ -16,5 +18,6 @@ module.exports = {
   questionController,
   questionpaperController,
   responseController,
-  resultController
+  resultController,
+  analyticsController
 }

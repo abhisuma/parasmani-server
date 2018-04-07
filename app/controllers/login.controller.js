@@ -6,7 +6,6 @@ const passport = require("passport");
 /* POST login. */
 exports.login = (req, res, next) => {
     passport.authenticate('local', {session: false}, (err, user, info) => {
-      console.log(user)
         if (err || !user) {
             return res.status(400).json({
                 message: 'Something is not right',
@@ -23,7 +22,8 @@ exports.login = (req, res, next) => {
            return res.json({
              token: token,
              user: {
-               _id:user._id
+               _id:user._id,
+               userId:user.username
              }
            });
         });

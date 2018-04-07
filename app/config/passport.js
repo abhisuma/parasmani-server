@@ -14,20 +14,18 @@ passport.use(new LocalStrategy({
       },
       function (userId, password, callb) {
           //this one is typically a DB call. Assume that the returned user object is pre-formatted and ready for storing in JWT
-          return User.findOne({userId}).then(user => {
+          return User.findOne({username:userId}).then(user => {
                  if (user != null) {
                    return user.comparePassword(password,(err,isMatch)=>{
+                     console.log(isMatch)
                      if(!isMatch){
-                       console.log({message: 'Incorrect email or password.'});
                        return callb(null, false, {message: 'Incorrect email or password.'});
                      }
                      else{
-                       console.log({message: 'Logged In Successfully.'});
                        return callb(null, user.toJSON(), {message: 'Logged In Successfully'});
                      }
                    });
                  }
-                 console.log({message: 'Incorrect email or password.'});
                  return callb(null, false, {message: 'Incorrect email or password.'});
             })
             .catch(err => callb(err));
