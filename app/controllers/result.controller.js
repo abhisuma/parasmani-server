@@ -13,28 +13,23 @@ const result=mongoose.model('results');
 
 function questionChecker(language,question_id,response,cb){
   if(response==0){
-    cb(0)
+    return cb(0)
   }
   exam.findOne({},function(err,doc){
-    if(doc){
-      doc.answerkey.forEach(function(item){
-        console.log(item.answers)
-        if(item.language==language){
-          item.answers.forEach((val) => {
-          })
-            // if(value.question_id==question_id){
-            //   if(value.answer_id==response){
-            //     cb(1)
-            //   }
-            //   else {
-            //     cb(-1)
-            //   }
-            // }
-
-        }
-      })
-    }
-
+    doc.answerkey.forEach(function(item){
+      if(item.language==language){
+        item.answers.forEach(function(value){
+          if(value.question_id==question_id){
+            if(value.answer_id==response){
+              return cb(1)
+            }
+            else {
+              return cb(-1)
+            }
+          }
+        })
+      }
+    })
   })
 }
 
@@ -60,6 +55,7 @@ response.find({},function(err,responses){
               { $push: {"answer":answer}},
               {  safe: true, upsert: true},
               function(err, model) {
+                console.log(model)
                 if(err){
                   console.log(err);
                 }
@@ -71,7 +67,7 @@ response.find({},function(err,responses){
 })
 })
 
-return res.send("done");
+res.send("done");
   // exam.findOne({},function(err,doc){
   //   doc.answerkey.answers.forEach(function(value){
   //     if(value.question_id)
