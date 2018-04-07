@@ -1,6 +1,8 @@
 const bodyParser = require('body-parser')
 const passport = require('passport');
 
+const additionalAuth = require('./authMiddlewares')
+
 // create application/json parser
 const jsonParser = bodyParser.json()
 
@@ -20,4 +22,7 @@ module.exports = {
   urlencodedParser,
   auth,
   cors,
+  studentCheck : additionalAuth.studentCheck,
+  adminCheck : additionalAuth.adminCheck,
+  studentBatchCheck : additionalAuth.studentBatchCheck,
 }

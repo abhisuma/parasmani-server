@@ -5,28 +5,29 @@ const router = express.Router()
 const Middlewares  = require('./middlewares/index');
 const Controllers = require('./controllers/index');
 
-router.get('/',Middlewares.auth,Controllers.homeController.index);
+router.get('/',Middlewares.auth,Middlewares.adminCheck,Controllers.homeController.index);
 //router.post('/signup',Middlewares.jsonParser,Controllers.registrationController.signUp);
 router.post('/login',Middlewares.jsonParser,Controllers.loginController.login);
 router.post('/login/student',Middlewares.jsonParser,Controllers.loginController.login);
 
 
-router.post('/signup/admin',Middlewares.jsonParser,Controllers.registrationController.signUpAdmin);
-router.post('/signup/student',Middlewares.jsonParser,Controllers.registrationController.signUpStudent);
+router.post('/signup/admin',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.registrationController.signUpAdmin);
+router.post('/signup/student',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.registrationController.signUpStudent);
 
 
-router.post('/addExam',Middlewares.jsonParser,Controllers.examController.addExam);
-router.post('/addQuestion',Middlewares.jsonParser,Controllers.questionController.addQuestions);
-router.get('/exam',Controllers.examController.getExam);
+router.post('/addExam',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.examController.addExam);
+router.post('/addQuestion',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.questionController.addQuestions);
 
+router.get('/exam',Middlewares.auth,Middlewares.adminCheck,Controllers.examController.getExam);
+router.get('/examStudent',Middlewares.auth,Middlewares.studentBatchCheck,Controllers.examController.getExam);
 
-router.get('/subjects',Controllers.examController.getSubjects);
-router.get('/languages',Controllers.examController.getLanguages);
-router.get('/batches',Controllers.examController.getBatches);
+router.get('/subjects',Middlewares.auth,Controllers.examController.getSubjects);
+router.get('/languages',Middlewares.auth,Controllers.examController.getLanguages);
+router.get('/batches',Middlewares.auth,Controllers.examController.getBatches);
 
-router.post('/response',Middlewares.jsonParser,Controllers.responseController.addResponse)
-router.get('/generateResults',Middlewares.jsonParser,Controllers.resultController.generateResult)
-router.get('/studentAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
+router.post('/response',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.responseController.addResponse)
+router.get('/generateResults',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateResult)
+router.get('/studentAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
 module.exports = router;
 //5ab94284c5961d121c9ec97b
 //5ab943afc5961d121c9ec97c
