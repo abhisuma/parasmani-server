@@ -84,3 +84,58 @@ exports.generateStudentAnalytics = (req,res) => {
     })
   })
 }
+
+
+
+exports.getBulkAnalytics = (req,res)=>{
+  const analytics=mongoose.model('bulkAnalytics');
+  const tempAnalytics={};
+  studentanalytics.find({},function(err,doc){
+    var temp={
+      setA:{correct:0,incorrect:0,unattempted:0},
+      setB:{correct:0,incorrect:0,unattempted:0},
+      setC:{correct:0,incorrect:0,unattempted:0},
+      setD:{correct:0,incorrect:0,unattempted:0}
+    }
+    doc.forEach(function(value){
+      setA.correct+=value.setA.correct;
+      setA.incorrect+=value.setA.incorrect;
+      setA.unattempted+=value.setA.unattempted;
+
+      setB.correct+=value.setB.correct;
+      setB.incorrect+=value.setB.incorrect;
+      setB.unattempted+=value.setB.unattempted;
+
+      setC.correct+=value.setC.correct;
+      setC.incorrect+=value.setC.incorrect;
+      setC.unattempted+=value.setC.unattempted;
+
+      setD.correct+=value.setD.correct;
+      setD.incorrect+=value.setD.incorrect;
+      setD.unattempted+=value.setD.unattempted;
+
+      tempAnalytics.setvise=temp;
+    });
+    exam.findOne({},function(err,value){
+      if(value){
+        let subject = {}
+        value.subjects.forEach(function(item){
+          let key = item.title.toString()
+          subject[key] = {correct:0,incorrect:0,unattempted:0}
+        })
+
+        doc.forEach(function(value){
+          subject[value.subjectvise.subject].correct+=value.subjectvise.correct;
+          subject[value.subjectvise.subject].incorrect+=value.subjectvise.incorrect;
+          subject[value.subjectvise.subject].unattempted+=value.subjectvise.unattempted;
+        })
+        tempAnalytics.subjectvise=subject;
+      }
+    })
+    const newAnalytics=analytics({
+      setvise:tempAnalytics.setvise,
+      subjectvise:tempAnalytics.subjectvise
+    })
+    newAnalytics.save();
+  })
+}

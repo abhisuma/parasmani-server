@@ -12,3 +12,4 @@ module.exports = require('./answer.schema.js');
 module.exports = require('./response.schema.js');
 module.exports = require('./result.schema.js');
 module.exports = require('./studentAnalytics.schema');
+module.exports=require('./bulkAnalytics.schema.js');

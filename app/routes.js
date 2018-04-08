@@ -28,6 +28,7 @@ router.get('/batches',Middlewares.auth,Controllers.examController.getBatches);
 router.post('/response',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.responseController.addResponse)
 router.get('/generateResults',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateResult)
 router.get('/studentAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
+router.get('/bulkAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.getBulkAnalytics)
 module.exports = router;
 //5ab94284c5961d121c9ec97b
 //5ab943afc5961d121c9ec97c
