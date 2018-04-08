@@ -98,23 +98,22 @@ exports.getBulkAnalytics = (req,res)=>{
       setD:{correct:0,incorrect:0,unattempted:0}
     }
     doc.forEach(function(value){
-      setA.correct+=value.setA.correct;
-      setA.incorrect+=value.setA.incorrect;
-      setA.unattempted+=value.setA.unattempted;
+      temp.setA.correct+=value.setA.correct;
+      temp.setA.incorrect+=value.setA.incorrect;
+      temp.setA.unattempted+=value.setA.unattempted;
 
-      setB.correct+=value.setB.correct;
-      setB.incorrect+=value.setB.incorrect;
-      setB.unattempted+=value.setB.unattempted;
+      temp.setB.correct+=value.setB.correct;
+      temp.setB.incorrect+=value.setB.incorrect;
+      temp.setB.unattempted+=value.setB.unattempted;
 
-      setC.correct+=value.setC.correct;
-      setC.incorrect+=value.setC.incorrect;
-      setC.unattempted+=value.setC.unattempted;
+      temp.setC.correct+=value.setC.correct;
+      temp.setC.incorrect+=value.setC.incorrect;
+      temp.setC.unattempted+=value.setC.unattempted;
 
-      setD.correct+=value.setD.correct;
-      setD.incorrect+=value.setD.incorrect;
-      setD.unattempted+=value.setD.unattempted;
-
-      tempAnalytics.setvise=temp;
+      temp.setD.correct+=value.setD.correct;
+      temp.setD.incorrect+=value.setD.incorrect;
+      temp.setD.unattempted+=value.setD.unattempted;
+      tempAnalytics['setvise']=temp;
     });
     exam.findOne({},function(err,value){
       if(value){
@@ -124,18 +123,31 @@ exports.getBulkAnalytics = (req,res)=>{
           subject[key] = {correct:0,incorrect:0,unattempted:0}
         })
 
-        doc.forEach(function(value){
-          subject[value.subjectvise.subject].correct+=value.subjectvise.correct;
-          subject[value.subjectvise.subject].incorrect+=value.subjectvise.incorrect;
-          subject[value.subjectvise.subject].unattempted+=value.subjectvise.unattempted;
+        doc.forEach(function(val){
+          val.subjectvise.forEach((sub) => {
+            subject[sub.subject].correct+=sub.correct;
+            subject[sub.subject].incorrect+=sub.incorrect;
+            subject[sub.subject].unattempted+=sub.unattempted;
+          })
         })
-        tempAnalytics.subjectvise=subject;
+        console.log(subject)
+        let subList = []
+        for(let k in subject) {
+          subList.push({
+            subject: k,
+            correct: subject[k].correct,
+            incorrect: subject[k].incorrect,
+            unattempted: subject[k].unattempted,
+          })
+        }
+        tempAnalytics['subjectvise']=subList;
+        const newAnalytics=analytics({
+          setvise:tempAnalytics.setvise,
+          subjectvise:tempAnalytics.subjectvise
+        })
+        newAnalytics.save()
       }
     })
-    const newAnalytics=analytics({
-      setvise:tempAnalytics.setvise,
-      subjectvise:tempAnalytics.subjectvise
-    })
-    newAnalytics.save();
+
   })
 }
