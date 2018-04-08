@@ -163,6 +163,21 @@ return res.send(newExam);
 
 }
 
+
+// exports.modifyExam=(req,res)=>{
+//   const Exam = mongoose.model('Exams');
+//   exam.findOneAndRemove({},function(err,doc){
+//     if(err){
+//       console.log(err);
+//     }
+//     else{
+//     res.send("done")
+//     }
+//   })
+//   const newExam =
+//
+// }
+
 exports.addBatches =(req,res) => {
   const data = req.body;
   const batch = mongoose.model('Batches');

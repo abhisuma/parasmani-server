@@ -21,6 +21,7 @@ router.post('/addQuestion',Middlewares.auth,Middlewares.adminCheck,Middlewares.j
 router.get('/exam',Middlewares.auth,Middlewares.adminCheck,Controllers.examController.getExam);
 router.get('/examStudent',Middlewares.auth,Middlewares.studentBatchCheck,Controllers.examController.getExam);
 
+router.get('/students',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.studentController.getStudent)
 router.get('/subjects',Middlewares.auth,Controllers.examController.getSubjects);
 router.get('/languages',Middlewares.auth,Controllers.examController.getLanguages);
 router.get('/batches',Middlewares.auth,Controllers.examController.getBatches);
@@ -29,6 +30,8 @@ router.post('/response',Middlewares.auth,Middlewares.adminCheck,Middlewares.json
 router.get('/generateResults',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateResult)
 router.get('/studentAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
 router.get('/bulkAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.getBulkAnalytics)
+
+router.delete('/students',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.studentController.deleteStudent)
 module.exports = router;
 //5ab94284c5961d121c9ec97b
 //5ab943afc5961d121c9ec97c
