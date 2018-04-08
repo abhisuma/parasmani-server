@@ -6,12 +6,14 @@ const mongoose = require('mongoose')
 exports.signUpStudent = (req,res) => {
   const data = req.body;
   const User = mongoose.model('student');
+  console.log(JSON.parse(data.batch).start_time)
   const newUser = User({
     firstname: data.firstName,
     middlename: data.middleName,
     lastname: data.lastName,
     gender: data.gender,
-    batch: data.batch,
+    batchStart: JSON.parse(data.batch).start_time,
+    batchEnd: JSON.parse(data.batch).end_time,
     aadharNo: data.aadharNo,
     contactNo: data.contactNo,
     email: data.email,
@@ -24,7 +26,7 @@ exports.signUpStudent = (req,res) => {
     incomeCard:data.incomeCard,
     religion: data.religion,
     nationality: data.nationality,
-    password: data.aadharNo,
+    password: data.password,
     username:data.aadharNo
   })
 
@@ -32,7 +34,7 @@ exports.signUpStudent = (req,res) => {
     console.log("Signed Up successfully");
     return res.send("Signed Up successfully");
   },(value) => {
-    console.log("Signed Up failed");
+    console.log(value);
     return res.send("Signed Up failed");
   })
 

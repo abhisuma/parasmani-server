@@ -5,7 +5,7 @@ const router = express.Router()
 const Middlewares  = require('./middlewares/index');
 const Controllers = require('./controllers/index');
 
-router.get('/',Middlewares.auth,Middlewares.adminCheck,Controllers.homeController.index);
+router.get('/',Middlewares.auth,Middlewares.studentBatchCheck,Controllers.homeController.index);
 //router.post('/signup',Middlewares.jsonParser,Controllers.registrationController.signUp);
 router.post('/login',Middlewares.jsonParser,Controllers.loginController.login);
 router.post('/login/student',Middlewares.jsonParser,Controllers.loginController.login);

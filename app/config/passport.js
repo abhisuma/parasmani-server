@@ -17,7 +17,6 @@ passport.use(new LocalStrategy({
           return User.findOne({username:userId}).then(user => {
                  if (user != null) {
                    return user.comparePassword(password,(err,isMatch)=>{
-                     console.log(isMatch)
                      if(!isMatch){
                        return callb(null, false, {message: 'Incorrect email or password.'});
                      }

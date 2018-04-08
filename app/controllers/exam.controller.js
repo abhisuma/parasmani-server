@@ -124,7 +124,8 @@ exports.addExam =(req,res) => {
     console.log(strToTime(value.start))
     const newbatch= batch({
       batch_number: value.key,
-      start_time: Date.parse(strToTime(value.start)),
+      start_time: value.start,
+      end_time: parseInt(value.start) + parseInt(data.duration)*60*1000,
 //      number_of_students: Number
     })
     Exam.findOneAndUpdate(
