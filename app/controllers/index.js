@@ -9,6 +9,7 @@ const questionpaperController = require('./questionpaper.controller.js');
 const responseController = require('./response.controller.js');
 const resultController = require('./result.controller.js');
 const analyticsController = require('./analytics.controller')
+const studentController=require('./student.controller.js')
 
 module.exports = {
   homeController,
@@ -19,5 +20,6 @@ module.exports = {
   questionpaperController,
   responseController,
   resultController,
-  analyticsController
+  analyticsController,
+  studentController
 }

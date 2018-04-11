@@ -25,7 +25,7 @@ exports.addQuestions =(req,res) => {
     };
 
 
-  let pushData =
+    let pushData =
   (data.difficulty == 'A' ? {'question_papers.$.A' :newquestion} : data.difficulty == 'B' ? {'question_papers.$.B' :newquestion} : data.difficulty == 'C' ? {'question_papers.$.C' :newquestion} : {'question_papers.$.D' :newquestion} )
 
   exam.findOne({}).then((ex) => {
@@ -45,8 +45,29 @@ exports.addQuestions =(req,res) => {
 
 
 
+}
 
+exports.deleteQuestion=(req,res)=>{
+  var id=new ObjectId(data.id)
+  let pushData =
+(data.difficulty == 'A' ? {'question_papers.$.A' :{'_id':id}} : data.difficulty == 'B' ? {'question_papers.$.B' :{'_id':id}} : data.difficulty == 'C' ? {'question_papers.$.C' :{'_id':id}} : {'question_papers.$.D' :{'_id':id}} )
 
+  exam.findOne({}).then((ex) => {
+    console.log(ex);
+    var id = ex._id;
+    exam.update({_id : id,"question_papers.language" : data.language},
+      {$push : pullData},{upsert: true}, function(err, docs){
+//        res.json(docs);
+//        console.log(docs);
+        });
+    exam.update({_id : id,"answerkey.language" : data.language},
+      {$push : {'answerkey.$.answers' : {'question_id':id}}},{upsert: true}, function(err, docs){
+        res.json(docs);
+    //        console.log(docs);
+        });
+
+})
+}
 
   //   console.log(data.language)
   // questionpaper.findOneAndUpdate(
@@ -71,6 +92,3 @@ exports.addQuestions =(req,res) => {
   // })
 
   //   // console.log(qp)
-
-
-}

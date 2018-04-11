@@ -25,6 +25,18 @@ exports.getExam=(req,res)=>{
     });
 }
 
+exports.getAllExam=(req,res)=>{
+  const Exam = mongoose.model('Exams');
+  Exam.findOne({},'exam_name batches instruction subjects question_papers duration answerkey',function(err, model) {
+       if(err){
+        console.log(err);
+        return res.send(err);
+       }
+       //console.log(model);
+        return res.json(model);
+    });
+}
+
 
 exports.getSubjects=(req,res)=>{
   const Exam = mongoose.model('Exams');
@@ -162,6 +174,21 @@ return res.send(newExam);
 // console.log(newExam)
 
 }
+
+
+// exports.modifyExam=(req,res)=>{
+//   const Exam = mongoose.model('Exams');
+//   exam.findOneAndRemove({},function(err,doc){
+//     if(err){
+//       console.log(err);
+//     }
+//     else{
+//     res.send("done")
+//     }
+//   })
+//   const newExam =
+//
+// }
 
 exports.addBatches =(req,res) => {
   const data = req.body;
