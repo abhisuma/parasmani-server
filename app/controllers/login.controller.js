@@ -24,7 +24,8 @@ exports.login = (req, res, next) => {
              token: token,
              user: {
                _id:user._id,
-               userId:user.username
+               userId:user.username,
+               kind:user.kind
              }
            });
         });
