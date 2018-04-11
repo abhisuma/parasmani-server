@@ -15,7 +15,7 @@ router.post('/signup/admin',Middlewares.auth,Middlewares.adminCheck,Middlewares.
 router.post('/signup/student',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.registrationController.signUpStudent);
 
 
-router.post('/addExam',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.examController.addExam);
+router.post('/addExam',Middlewares.jsonParser,Controllers.examController.addExam);
 router.post('/addQuestion',Middlewares.jsonParser,Controllers.questionController.addQuestions);
 
 router.get('/exam',Middlewares.auth,Middlewares.adminCheck,Controllers.examController.getExam);

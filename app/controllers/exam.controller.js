@@ -170,6 +170,9 @@ data.subjects.forEach(function(value){
   });
 })
 return res.send(newExam);
+}).catch((err) => {
+  res.status(500)
+  return res.send(err);
 });
 // console.log(newExam)
 

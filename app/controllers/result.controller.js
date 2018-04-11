@@ -68,7 +68,7 @@ response.find({},function(err,responses){
 })
 })
 
-res.send("done");
+return res.send("done");
   // exam.findOne({},function(err,doc){
   //   doc.answerkey.answers.forEach(function(value){
   //     if(value.question_id)
