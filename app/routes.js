@@ -33,7 +33,7 @@ router.get('/bulkAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.
 router.get('/test',Controllers.analyticsController.getCategoryAnalytics)
 router.get('/examAll',Middlewares.auth,Middlewares.adminCheck,Controllers.examController.getAllExam);
 // router.delete('/question',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.questionController.deleteQuestion);
-router.delete('/students',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.studentController.deleteStudent)
+router.post('/students',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.studentController.deleteStudent)
 module.exports = router;
 //5ab94284c5961d121c9ec97b
 //5ab943afc5961d121c9ec97c
