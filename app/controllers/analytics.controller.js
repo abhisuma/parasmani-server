@@ -162,7 +162,7 @@ exports.getBulkAnalytics = (req,res)=>{
 }
 
 
-exports.getCategoryAnalytics = (res,req) => {
+exports.getCategoryAnalytics = (req,res) => {
   const categoryAnalytics=mongoose.model('categoryAnalytics');
   function categoryvalues(cat){
     studentanalytics.find({}).populate('student_id').exec(function(err,doc){
@@ -174,7 +174,6 @@ exports.getCategoryAnalytics = (res,req) => {
             let key = item.title.toString()
             subject[key] = {correct:0,incorrect:0,unattempted:0}
           })
-
           doc.forEach(function(val){
             if(val.student_id.category==cat)
             {
@@ -197,7 +196,7 @@ exports.getCategoryAnalytics = (res,req) => {
           tempAnalytics['subjectvise']=subList;
           const newC=categoryAnalytics({
             category:cat,
-            subjectvise:sublist
+            subjectvise:subList
           })
           newC.save();
         }
@@ -206,6 +205,8 @@ exports.getCategoryAnalytics = (res,req) => {
 
   }
   var categories=['General','SC','ST','OBC','Other'];
-  categories.forEach(categoryvalues(value));
-  res.send("done");
+  categories.forEach((val) => {
+    categoryvalues(val)
+  });
+  return res.send("done");
 }
