@@ -162,10 +162,8 @@ exports.getBulkAnalytics = (req,res)=>{
 
 
 exports.getCategoryAnalytics = (res,req) => {
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
   function categoryvalues(category){
     studentanalytics.find({}).populate('student_id').exec(function(err,doc){
-//      console.log(err,doc)
       var tempAnalytics={};
       exam.findOne({},function(err,value){
         if(value){
@@ -185,7 +183,6 @@ exports.getCategoryAnalytics = (res,req) => {
             })
           }
           })
-          console.log(subject)
           let subList = []
           for(let k in subject) {
             subList.push({
@@ -201,7 +198,5 @@ exports.getCategoryAnalytics = (res,req) => {
     });
 
   }
-console.log("result");
-  categoryvalues('Othersss');
-  console.log(categoryvalues('Otherss'));
+
 }
