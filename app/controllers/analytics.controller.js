@@ -210,3 +210,53 @@ exports.getCategoryAnalytics = (req,res) => {
   });
   return res.send("done");
 }
+
+
+exports.getincomeAnalytics = (req,res) => {
+  const incomeAnalytics=mongoose.model('incomeAnalytics');
+  function cardvalues(car){
+    studentanalytics.find({}).populate('student_id').exec(function(err,doc){
+      var tempAnalytics={};
+      exam.findOne({},function(err,value){
+        if(value){
+          let subject = {}
+          value.subjects.forEach(function(item){
+            let key = item.title.toString()
+            subject[key] = {correct:0,incorrect:0,unattempted:0}
+          })
+          doc.forEach(function(val){
+            if(val.student_id.incomeCard==car)
+            {
+            val.subjectvise.forEach((sub) => {
+              subject[sub.subject].correct+=sub.correct;
+              subject[sub.subject].incorrect+=sub.incorrect;
+              subject[sub.subject].unattempted+=sub.unattempted;
+            })
+          }
+          })
+          let subList = []
+          for(let k in subject) {
+            subList.push({
+              subject: k,
+              correct: subject[k].correct,
+              incorrect: subject[k].incorrect,
+              unattempted: subject[k].unattempted,
+            })
+          }
+          tempAnalytics['subjectvise']=subList;
+          const newC=incomeAnalytics({
+            incomeCard:car,
+            subjectvise:subList
+          })
+          newC.save();
+        }
+      })
+    });
+
+  }
+  var incomeCards=['BPL','APL'];
+  incomeCards.forEach((val) => {
+    cardvalues(val)
+  });
+  return res.send("done");
+}
