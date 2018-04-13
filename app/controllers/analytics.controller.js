@@ -157,9 +157,9 @@ exports.getBulkAnalytics = (req,res)=>{
 }
 
 
-exports.getCategoryAnalytics(){
+exports.getCategoryAnalytics = (res,req) => {
 //  function categoryvalues(category){
-    studentanalytics.findOne({}).populate(student_id).exec(function(err,value){
+    studentanalytics.findOne({}).populate('student_id').exec(function(err,value){
       console.log(value);
     });
 //  }
