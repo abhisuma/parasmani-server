@@ -30,7 +30,7 @@ router.post('/response',Middlewares.jsonParser,Controllers.responseController.ad
 router.get('/generateResults',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateResult)
 router.get('/studentAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
 router.get('/bulkAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.getBulkAnalytics)
-
+router.get('/test',Controllers.analyticsController.getCategoryAnalytics)
 router.get('/examAll',Middlewares.auth,Middlewares.adminCheck,Controllers.examController.getAllExam);
 router.delete('/question',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.questionController.deleteQuestion);
 router.delete('/students',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.studentController.deleteStudent)

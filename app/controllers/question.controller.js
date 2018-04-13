@@ -51,7 +51,7 @@ exports.deleteQuestion=(req,res)=>{
   const data = req.body
   var id=new mongoose.Types.ObjectId(data.id)
   let pullData =
-(data.difficulty == 'A' ? {'question_papers.$.A' :{'_id':id}} : data.difficulty == 'B' ? {'question_papers.$.B' :{'_id':id}} : data.difficulty == 'C' ? {'question_papers.$.C' :{'_id':id}} : {'question_papers.$.D' :{'_id':id}} )
+(data.difficulty == 'A' ? {'question_papers':{'A' :{'_id':id}} : data.difficulty == 'B' ? {'question_papers.$.B' :{'_id':id}} : data.difficulty == 'C' ? {'question_papers.$.C' :{'_id':id}} : {'question_papers.$.D' :{'_id':id}} )
 
   console.log(pullData)
   exam.findOne({}).then((ex) => {

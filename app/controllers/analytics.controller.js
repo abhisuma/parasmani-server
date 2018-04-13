@@ -155,3 +155,12 @@ exports.getBulkAnalytics = (req,res)=>{
 
   })
 }
+
+
+exports.getCategoryAnalytics(){
+//  function categoryvalues(category){
+    studentanalytics.findOne({}).populate(student_id).exec(function(err,value){
+      console.log(value);
+    });
+//  }
+}
