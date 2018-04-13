@@ -14,3 +14,4 @@ module.exports = require('./result.schema.js');
 module.exports = require('./studentAnalytics.schema');
 module.exports=require('./bulkAnalytics.schema.js');
 module.exports=require('./categoryAnalytics.schema.js');
+module.exports=require('./incomeAnalytics.schema.js');
