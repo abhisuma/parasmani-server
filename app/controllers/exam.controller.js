@@ -87,6 +87,8 @@ exports.getBatches=(req,res)=>{
 exports.addExam =(req,res) => {
   const data = req.body;
   const Exam = mongoose.model('Exams');
+
+  Exam.collection.drop().then((val) => {
   const newExam = Exam({
     "exam_name" : data.name,
     "instruction" : data.instructions,
@@ -175,7 +177,7 @@ return res.send(newExam);
   return res.send(err);
 });
 // console.log(newExam)
-
+})
 }
 
 
