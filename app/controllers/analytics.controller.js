@@ -93,7 +93,7 @@ exports.generateStudentAnalytics = (req,res) => {
 
 exports.getBulkAnalytics = (req,res)=>{
   const analytics=mongoose.model('bulkAnalytics');
-  const tempAnalytics={};
+  var tempAnalytics={};
   studentanalytics.find({},function(err,doc){
     console.log(err,doc)
 
@@ -163,9 +163,45 @@ exports.getBulkAnalytics = (req,res)=>{
 
 exports.getCategoryAnalytics = (res,req) => {
   console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-//  function categoryvalues(category){
-    studentanalytics.findOne({}).populate('student_id').exec(function(err,value){
-      console.log(value);
+  function categoryvalues(category){
+    studentanalytics.find({}).populate('student_id').exec(function(err,doc){
+//      console.log(err,doc)
+      var tempAnalytics={};
+      exam.findOne({},function(err,value){
+        if(value){
+          let subject = {}
+          value.subjects.forEach(function(item){
+            let key = item.title.toString()
+            subject[key] = {correct:0,incorrect:0,unattempted:0}
+          })
+
+          doc.forEach(function(val){
+            if(val.student_id.category==category)
+            {
+            val.subjectvise.forEach((sub) => {
+              subject[sub.subject].correct+=sub.correct;
+              subject[sub.subject].incorrect+=sub.incorrect;
+              subject[sub.subject].unattempted+=sub.unattempted;
+            })
+          }
+          })
+          console.log(subject)
+          let subList = []
+          for(let k in subject) {
+            subList.push({
+              subject: k,
+              correct: subject[k].correct,
+              incorrect: subject[k].incorrect,
+              unattempted: subject[k].unattempted,
+            })
+          }
+          tempAnalytics['subjectvise']=subList;
+        }
+      })
     });
-//  }
+
+  }
+console.log("result");
+  categoryvalues('Othersss');
+  console.log(categoryvalues('Otherss'));
 }
