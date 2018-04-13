@@ -25,6 +25,7 @@ const studentAnalyticsSchema = new Schema({
     unattempted:Number
   },
   marks:Number,
+  totalMarks:Number,
   subjectvise:[{
     subject: String,
     correct: Number,
