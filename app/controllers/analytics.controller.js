@@ -105,6 +105,7 @@ exports.generateStudentAnalytics = (req,res) => {
             unattempted:Ds[1],
             correct:Ds[2]
           },
+          marks:As[2]-As[0]+Bs[2]-Bs[0]+Cs[2]-Cs[0]+Ds[2]-Ds[0],
           subjectvise:temp
         })
         console.log("newAnalytics")
