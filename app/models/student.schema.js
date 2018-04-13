@@ -12,7 +12,7 @@ const studentSchema = new Schema({
   gender: String,
   batchStart: Number,
   batchEnd: Number,
-  aadharNo: String,
+  aadharNo: {type:String,unique:true},
   contactNo: String,
   email: String,
   eduQuali: String,
