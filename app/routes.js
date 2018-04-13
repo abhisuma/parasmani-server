@@ -27,9 +27,18 @@ router.get('/languages',Middlewares.auth,Controllers.examController.getLanguages
 router.get('/batches',Middlewares.auth,Controllers.examController.getBatches);
 
 router.post('/response',Middlewares.jsonParser,Controllers.responseController.addResponse)
+
 router.get('/generateResults',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateResult)
-router.get('/studentAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
-router.get('/bulkAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.getBulkAnalytics)
+router.get('/generateStudentAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
+router.get('/generateBulkAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.getBulkAnalytics)
+router.get('/generateIncomeAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateResult)
+router.get('/generateCategoryAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
+
+router.get('/getStudentAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateResult)
+router.get('/getBulkAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
+
+
+
 router.get('/test',Controllers.analyticsController.getincomeAnalytics)
 router.get('/examAll',Middlewares.auth,Middlewares.adminCheck,Controllers.examController.getAllExam);
 // router.delete('/question',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.questionController.deleteQuestion);
