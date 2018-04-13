@@ -48,21 +48,22 @@ exports.addQuestions =(req,res) => {
 }
 
 exports.deleteQuestion=(req,res)=>{
-  var id=new ObjectId(data.id)
-  let pushData =
+  const data = req.body
+  var id=new mongoose.Types.ObjectId(data.id)
+  let pullData =
 (data.difficulty == 'A' ? {'question_papers.$.A' :{'_id':id}} : data.difficulty == 'B' ? {'question_papers.$.B' :{'_id':id}} : data.difficulty == 'C' ? {'question_papers.$.C' :{'_id':id}} : {'question_papers.$.D' :{'_id':id}} )
 
+  console.log(pullData)
   exam.findOne({}).then((ex) => {
-    console.log(ex);
-    var id = ex._id;
-    exam.update({_id : id,"question_papers.language" : data.language},
-      {$push : pullData},{upsert: true}, function(err, docs){
-//        res.json(docs);
-//        console.log(docs);
-        });
-    exam.update({_id : id,"answerkey.language" : data.language},
-      {$push : {'answerkey.$.answers' : {'question_id':id}}},{upsert: true}, function(err, docs){
-        res.json(docs);
+    var eid = ex._id;
+    exam.update({_id : eid,"question_papers.language" : data.language},
+      {$pull : pullData}, function(err, docs){
+       // res.json("err");
+       console.log(docs,err);
+     });
+    exam.update({_id : eid,"answerkey.language" : data.language},
+      {$pull : {'answerkey.$.answers' : {'question_id':id}}},{upsert: true}, function(err, docs){
+        // res.json(docs);
     //        console.log(docs);
         });
 

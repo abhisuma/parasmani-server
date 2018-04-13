@@ -1,12 +1,8 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const exam=mongoose.model('Exams');
+mongoose.connect(`mongodb://localhost:27017`);
+require('./app/models');
+const exam = mongoose.model('Exams');
 
-
-
-exam.findOne({},function(err,doc){
-  doc.answerkey.forEach(function(value){
-    console.log("abhishek");
-  })
-})
+console.log(exam.populate('subjects'))
