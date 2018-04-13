@@ -163,7 +163,8 @@ exports.getBulkAnalytics = (req,res)=>{
 
 
 exports.getCategoryAnalytics = (res,req) => {
-  function categoryvalues(category){
+  const categoryAnalytics=mongoose.model('categoryAnalytics');
+  function categoryvalues(cat){
     studentanalytics.find({}).populate('student_id').exec(function(err,doc){
       var tempAnalytics={};
       exam.findOne({},function(err,value){
@@ -175,7 +176,7 @@ exports.getCategoryAnalytics = (res,req) => {
           })
 
           doc.forEach(function(val){
-            if(val.student_id.category==category)
+            if(val.student_id.category==cat)
             {
             val.subjectvise.forEach((sub) => {
               subject[sub.subject].correct+=sub.correct;
@@ -194,10 +195,17 @@ exports.getCategoryAnalytics = (res,req) => {
             })
           }
           tempAnalytics['subjectvise']=subList;
+          const newC=categoryAnalytics({
+            category:cat,
+            subjectvise:sublist
+          })
+          newC.save();
         }
       })
     });
 
   }
-
+  var categories=['General','SC','ST','OBC','Other'];
+  categories.forEach(categoryvalues(value));
+  res.send("done");
 }
