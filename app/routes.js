@@ -31,29 +31,16 @@ router.post('/response',Middlewares.jsonParser,Controllers.responseController.ad
 router.get('/generateResults',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateResult)
 router.get('/generateStudentAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
 router.get('/generateBulkAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.generateBulkAnalytics)
-router.get('/generateIncomeAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateincomeAnalytics)
+router.get('/generateIncomeAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.generateincomeAnalytics)
 router.get('/generateCategoryAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateCategoryAnalytics)
 
-router.get('/getStudentAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.getStudentAnalytics)
+router.post('/getStudentAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.getStudentAnalytics)
 router.get('/getBulkAnalytics',Middlewares.jsonParser,Controllers.analyticsController.getBulkAnalytics)
 
 
 
-router.get('/test',Controllers.analyticsController.getincomeAnalytics)
 router.get('/examAll',Middlewares.auth,Middlewares.adminCheck,Controllers.examController.getAllExam);
 // router.delete('/question',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.questionController.deleteQuestion);
 router.post('/students',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.studentController.deleteStudent)
+
 module.exports = router;
-//5ab94284c5961d121c9ec97b
-//5ab943afc5961d121c9ec97c
-/*
-{ languages: [ { key: 0, title: 'english' }, { key: 1, title: 'hindi' } ],
-  title: 'kani',
-  duration: '123',
-  batches:
-   [ { key: 0, title: '122121212121' },
-     { key: 1, title: '234234234356' } ],
-  subjects:
-   [ { key: 0, title: 'eng', NoQA: '1', NoQB: '1', NoQC: '1', NoQD: '1' },
-     { key: 0, title: 'bio', NoQA: '2', NoQB: '4', NoQC: '2', NoQD: '1' } ] }
-*/
