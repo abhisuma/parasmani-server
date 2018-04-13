@@ -8,7 +8,7 @@ const answerkeyschema=require('./answerkey.schema.js').schema;
 const batchschema=require('./batch.schema.js').schema;
 
 const examschema =new schema({
-  exam_name: String,
+  exam_name: {type:String,unique:true},
   batches : [batchschema],
   instruction: String,
   duration: Number,
