@@ -77,7 +77,7 @@ exports.generateStudentAnalytics = (req,res) => {
         })
         console.log("newAnalytics")
         newAnalytics.save().then((ex) => {
-          console.log(ex);
+          return res.json(ex)
         })
       }
       })
@@ -91,6 +91,8 @@ exports.getBulkAnalytics = (req,res)=>{
   const analytics=mongoose.model('bulkAnalytics');
   const tempAnalytics={};
   studentanalytics.find({},function(err,doc){
+    console.log(err,doc)
+
     var temp={
       setA:{correct:0,incorrect:0,unattempted:0},
       setB:{correct:0,incorrect:0,unattempted:0},
@@ -145,7 +147,9 @@ exports.getBulkAnalytics = (req,res)=>{
           setvise:tempAnalytics.setvise,
           subjectvise:tempAnalytics.subjectvise
         })
-        newAnalytics.save()
+        newAnalytics.save().then((val) => {
+          return res.json(val)
+        })
       }
     })
 

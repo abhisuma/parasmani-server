@@ -26,9 +26,9 @@ router.get('/subjects',Middlewares.auth,Controllers.examController.getSubjects);
 router.get('/languages',Middlewares.auth,Controllers.examController.getLanguages);
 router.get('/batches',Middlewares.auth,Controllers.examController.getBatches);
 
-router.post('/response',Middlewares.auth,Middlewares.studentCheck,Middlewares.jsonParser,Controllers.responseController.addResponse)
+router.post('/response',Middlewares.jsonParser,Controllers.responseController.addResponse)
 router.get('/generateResults',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateResult)
-router.get('/studentAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
+router.get('/studentAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
 router.get('/bulkAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.getBulkAnalytics)
 
 router.get('/examAll',Middlewares.auth,Middlewares.adminCheck,Controllers.examController.getAllExam);
