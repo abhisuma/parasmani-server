@@ -7,9 +7,9 @@ const exam = mongoose.model('Exams')
 const student=mongoose.model('student');
 
 exports.getStudentAnalytics=(req,res)=>{
-  const data=req.data;
-  studentanalytics.findOneById(data.id,function(err,value){
-    res.json(value);
+  const data=req.body;
+  studentanalytics.findOne({student_id:data.id},function(err,value){
+    return res.json(value);
   })
 };
 
@@ -17,7 +17,6 @@ exports.getBulkAnalytics=(req,res)=>{
   const bulkanalytics=mongoose.model('bulkAnalytics');
   const categoryAnalytics=mongoose.model('categoryAnalytics');
   const incomeAnalytics=mongoose.model('incomeAnalytics');
-  const data=req.data;
   const temp={};
   bulkanalytics.findOne({},function(err,value){
     temp['bulk']=value;
@@ -27,9 +26,18 @@ exports.getBulkAnalytics=(req,res)=>{
     }).then((u)=>{
       incomeAnalytics.findOne({},function(err,val){
         temp['income']=val;
-        res.json(temp);
+        return res.json(temp);
+      }).catch((err) => {
+        res.status(500)
+        return res.json(err);
       })
+    }).catch((err) => {
+      res.status(500)
+      return res.json(err);
     })
+  }).catch((err) => {
+    res.status(500)
+    return res.json(err);
   })
 };
 
