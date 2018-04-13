@@ -35,7 +35,8 @@ exports.signUpStudent = (req,res) => {
     return res.send("Signed Up successfully");
   },(value) => {
     console.log(value);
-    return res.send("Signed Up failed");
+    res.status_(500);
+    return res.send(value);
   })
 
 }
