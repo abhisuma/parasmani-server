@@ -15,6 +15,7 @@ exports.deleteStudent=(req,res)=>{
   student.findByIdAndRemove(data.id,function(err,doc){
     console.log(err,doc);
     if(err){
+      
     }
     else{
       res.send("done");
