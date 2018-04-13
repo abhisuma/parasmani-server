@@ -18,8 +18,8 @@ router.post('/signup/student',Middlewares.auth,Middlewares.adminCheck,Middleware
 router.post('/addExam',Middlewares.jsonParser,Controllers.examController.addExam);
 router.post('/addQuestion',Middlewares.jsonParser,Controllers.questionController.addQuestions);
 
-router.get('/exam',Middlewares.auth,Middlewares.adminCheck,Controllers.examController.getExam);
-router.get('/examStudent',Middlewares.auth,Middlewares.studentBatchCheck,Controllers.examController.getExam);
+router.get('/exam',Middlewares.auth,Controllers.examController.getExam);
+router.get('/examStudent',Middlewares.auth,Middlewares.studentCheck,Controllers.examController.getExam);
 
 router.get('/students',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.studentController.getStudent)
 router.get('/subjects',Middlewares.auth,Controllers.examController.getSubjects);
