@@ -49,10 +49,11 @@ exports.generateStudentAnalytics = (req,res) => {
           }
           temp.push(obj)
         }
+        student.find({'_id':mongoose.Types.ObjectId(student_response.student_id)},function(err,value){
         // console.log(student_response.student_id)
         // console.log(mongoose.Types.ObjectId(student_response.student_id))
         let newAnalytics = studentanalytics({
-          student_id: mongoose.Types.ObjectId(student_response.student_id),
+          student_id: value._id,
           setA: {
             incorrect:As[0],
             unattempted:As[1],
@@ -78,7 +79,7 @@ exports.generateStudentAnalytics = (req,res) => {
         console.log("newAnalytics")
         newAnalytics.save().then((ex) => {
           return res.json(ex)
-        })
+        }) })
       }
       })
     })
