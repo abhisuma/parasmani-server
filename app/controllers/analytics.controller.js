@@ -50,13 +50,14 @@ exports.generateStudentAnalytics = (req,res) => {
           }
           temp.push(obj)
         }
-        console.log("here");
-        student.findOne({'_id':mongoose.Types.ObjectId(student_response.student_id)},function(err,value){
+        console.log(student_response.student_id);
+        student.findOne({'_id':student_response.student_id},function(err,val){
+          console.log(val);
         // console.log(student_response.student_id)
-        console.log(value);console.log("here");
+        console.log("here");
         // console.log(mongoose.Types.ObjectId(student_response.student_id))
         let newAnalytics = studentanalytics({
-          student_id: value._id,
+          student_id: val._id,
           setA: {
             incorrect:As[0],
             unattempted:As[1],
@@ -119,8 +120,8 @@ exports.getBulkAnalytics = (req,res)=>{
       temp.setD.correct+=value.setD.correct;
       temp.setD.incorrect+=value.setD.incorrect;
       temp.setD.unattempted+=value.setD.unattempted;
-      tempAnalytics['setvise']=temp;
     });
+    tempAnalytics['setvise']=temp;
     exam.findOne({},function(err,value){
       if(value){
         let subject = {}

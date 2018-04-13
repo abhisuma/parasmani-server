@@ -11,10 +11,10 @@ exports.getStudent=(req,res)=>{
 }
 
 exports.deleteStudent=(req,res)=>{
-  student.findByIdAndDelete(data.id,function(err,doc){
+  const data = req.body
+  student.findByIdAndRemove(data.id,function(err,doc){
+    console.log(err,doc);
     if(err){
-      console.log(err);
-      res.send("error");
     }
     else{
       res.send("done");
