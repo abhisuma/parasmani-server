@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const studentanalytics = mongoose.model('studentAnalytics')
 const result = mongoose.model('results')
 const exam = mongoose.model('Exams')
+const student=mongoose.model('student');
 
 exports.generateStudentAnalytics = (req,res) => {
     result.find({},function(err,doc){
@@ -49,8 +50,10 @@ exports.generateStudentAnalytics = (req,res) => {
           }
           temp.push(obj)
         }
-        student.find({'_id':mongoose.Types.ObjectId(student_response.student_id)},function(err,value){
+        console.log("here");
+        student.findOne({'_id':mongoose.Types.ObjectId(student_response.student_id)},function(err,value){
         // console.log(student_response.student_id)
+        console.log(value);console.log("here");
         // console.log(mongoose.Types.ObjectId(student_response.student_id))
         let newAnalytics = studentanalytics({
           student_id: value._id,
@@ -159,6 +162,7 @@ exports.getBulkAnalytics = (req,res)=>{
 
 
 exports.getCategoryAnalytics = (res,req) => {
+  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 //  function categoryvalues(category){
     studentanalytics.findOne({}).populate('student_id').exec(function(err,value){
       console.log(value);
