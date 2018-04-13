@@ -6,6 +6,33 @@ const result = mongoose.model('results')
 const exam = mongoose.model('Exams')
 const student=mongoose.model('student');
 
+exports.getStudentAnalytics=(req,res)=>{
+  const data=req.data;
+  studentanalytics.findOneById(data.id,function(err,value){
+    res.json(value);
+  })
+};
+
+exports.getBulkAnalytics=(req,res)=>{
+  const bulkanalytics=mongoose.model('bulkAnalytics');
+  const categoryAnalytics=mongoose.model('categoryAnalytics');
+  const incomeAnalytics=mongoose.model('incomeAnalytics');
+  const data=req.data;
+  const temp={};
+  bulkanalytics.findOne({},function(err,value){
+    temp['bulk']=value;
+  }).then((t)=>{
+    categoryAnalytics.findOne({},function(err,valu){
+      temp['category']=valu;
+    }).then((u)=>{
+      incomeAnalytics.findOne({},function(err,val){
+        temp['income']=val;
+        res.json(temp);
+      })
+    })
+  })
+};
+
 exports.generateStudentAnalytics = (req,res) => {
     result.find({},function(err,doc){
       var sub = [0,0,0];
@@ -92,7 +119,7 @@ exports.generateStudentAnalytics = (req,res) => {
 
 
 
-exports.getBulkAnalytics = (req,res)=>{
+exports.generateBulkAnalytics = (req,res)=>{
   const analytics=mongoose.model('bulkAnalytics');
   var tempAnalytics={};
   studentanalytics.find({},function(err,doc){
@@ -162,7 +189,7 @@ exports.getBulkAnalytics = (req,res)=>{
 }
 
 
-exports.getCategoryAnalytics = (req,res) => {
+exports.generateCategoryAnalytics = (req,res) => {
   const categoryAnalytics=mongoose.model('categoryAnalytics');
   function categoryvalues(cat){
     studentanalytics.find({}).populate('student_id').exec(function(err,doc){
@@ -212,7 +239,7 @@ exports.getCategoryAnalytics = (req,res) => {
 }
 
 
-exports.getincomeAnalytics = (req,res) => {
+exports.generateincomeAnalytics = (req,res) => {
   const incomeAnalytics=mongoose.model('incomeAnalytics');
   function cardvalues(car){
     studentanalytics.find({}).populate('student_id').exec(function(err,doc){

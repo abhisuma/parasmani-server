@@ -30,12 +30,12 @@ router.post('/response',Middlewares.jsonParser,Controllers.responseController.ad
 
 router.get('/generateResults',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateResult)
 router.get('/generateStudentAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
-router.get('/generateBulkAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.getBulkAnalytics)
-router.get('/generateIncomeAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateResult)
-router.get('/generateCategoryAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
+router.get('/generateBulkAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.analyticsController.generateBulkAnalytics)
+router.get('/generateIncomeAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateincomeAnalytics)
+router.get('/generateCategoryAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateCategoryAnalytics)
 
-router.get('/getStudentAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.generateResult)
-router.get('/getBulkAnalytics',Middlewares.jsonParser,Controllers.analyticsController.generateStudentAnalytics)
+router.get('/getStudentAnalytics',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.resultController.getStudentAnalytics)
+router.get('/getBulkAnalytics',Middlewares.jsonParser,Controllers.analyticsController.getBulkAnalytics)
 
 
 
