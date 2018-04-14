@@ -21,6 +21,7 @@ exports.studentBatchCheck = function (req, res, next) {
     if (req.user.batchStart <= Date.parse(Date()) && Date.parse(req.user.batchEnd) >= Date.parse(Date())) {
       next()
     } else {
+      res.status(500)
       res.send("Error : The Student cannot give exam in the given time slot.")
     }
     }

@@ -7,8 +7,8 @@ const Controllers = require('./controllers/index');
 
 router.get('/',Middlewares.auth,Middlewares.studentBatchCheck,Controllers.homeController.index);
 //router.post('/signup',Middlewares.jsonParser,Controllers.registrationController.signUp);
-router.post('/login',Middlewares.auth,Middlewares.jsonParser,Controllers.loginController.login);
-router.post('/login/student',Middlewares.auth,Middlewares.studentCheck,Middlewares.jsonParser,Controllers.loginController.login);
+router.post('/login',Middlewares.jsonParser,Controllers.loginController.login);
+router.post('/login/student',Middlewares.jsonParser,Controllers.loginController.login);
 
 
 router.post('/signup/admin',Middlewares.jsonParser,Controllers.registrationController.signUpAdmin);
@@ -19,7 +19,7 @@ router.post('/addExam',Middlewares.jsonParser,Controllers.examController.addExam
 router.post('/addQuestion',Middlewares.jsonParser,Controllers.questionController.addQuestions);
 
 router.get('/exam',Middlewares.auth,Middlewares.adminCheck,Controllers.examController.getExam);
-router.get('/examStudent',Middlewares.auth,Middlewares.studentCheck,Controllers.examController.getExam);
+router.get('/examStudent',Middlewares.auth,Middlewares.studentBatchCheck,Controllers.examController.getExam);
 
 router.get('/students',Middlewares.auth,Middlewares.adminCheck,Middlewares.jsonParser,Controllers.studentController.getStudent)
 router.get('/subjects',Middlewares.auth,Controllers.examController.getSubjects);

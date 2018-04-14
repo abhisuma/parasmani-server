@@ -5,15 +5,16 @@ const mongoose = require('mongoose')
 
 exports.signUpStudent = (req,res) => {
   const data = req.body;
+  console.log(data)
   const User = mongoose.model('student');
-  console.log(JSON.parse(data.batch).start_time)
+  console.log(data.batch)
   const newUser = User({
     firstname: data.firstName,
     middlename: data.middleName,
     lastname: data.lastName,
     gender: data.gender,
-    batchStart: JSON.parse(data.batch).start_time,
-    batchEnd: JSON.parse(data.batch).end_time,
+    batchStart: new Date(data.batchStart),
+    batchEnd: new Date(data.batchEnd),
     aadharNo: data.aadharNo,
     contactNo: data.contactNo,
     email: data.email,

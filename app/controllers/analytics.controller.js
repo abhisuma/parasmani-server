@@ -7,8 +7,8 @@ const exam = mongoose.model('Exams')
 const student=mongoose.model('student');
 
 exports.getStudentAnalytics=(req,res)=>{
-  const data=req.body;
-  studentanalytics.findOne({student_id:data.id},function(err,value){
+  const data=req.user;
+  studentanalytics.findOne({student_id:data._id},function(err,value){
     return res.json(value);
   })
 };
