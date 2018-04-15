@@ -21,10 +21,10 @@ exports.getBulkAnalytics=(req,res)=>{
   bulkanalytics.findOne({},function(err,value){
     temp['bulk']=value;
   }).then((t)=>{
-    categoryAnalytics.findOne({},function(err,valu){
+    categoryAnalytics.find({},function(err,valu){
       temp['category']=valu;
     }).then((u)=>{
-      incomeAnalytics.findOne({},function(err,val){
+      incomeAnalytics.find({},function(err,val){
         temp['income']=val;
         return res.json(temp);
       }).catch((err) => {
