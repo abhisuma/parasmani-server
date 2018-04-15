@@ -47,28 +47,28 @@ exports.addQuestions =(req,res) => {
 
 }
 
-// exports.deleteQuestion=(req,res)=>{
-//   const data = req.body
-//   var id=new mongoose.Types.ObjectId(data.id)
-//   let pullData =
-// (data.difficulty == 'A' ? {'question_papers':{'A' :{'_id':id}} : data.difficulty == 'B' ? {'question_papers.$.B' :{'_id':id}} : data.difficulty == 'C' ? {'question_papers.$.C' :{'_id':id}} : {'question_papers.$.D' :{'_id':id}} )
-//
-//   console.log(pullData)
-//   exam.findOne({}).then((ex) => {
-//     var eid = ex._id;
-//     exam.update({_id : eid,"question_papers.language" : data.language},
-//       {$pull : pullData}, function(err, docs){
-//        // res.json("err");
-//        console.log(docs,err);
-//      });
-//     exam.update({_id : eid,"answerkey.language" : data.language},
-//       {$pull : {'answerkey.$.answers' : {'question_id':id}}},{upsert: true}, function(err, docs){
-//         // res.json(docs);
-//     //        console.log(docs);
-//         });
-//
-// })
-// }
+exports.deleteQuestion=(req,res)=>{
+  const data = req.body
+  console.log(data)
+  exam.findOne({}).then((val) => {
+    val.question_papers.forEach((paper) => {
+      if(paper.language == data.lang) {
+        for(var i=0; i < paper[data.set].length; i++) {
+           if(paper[data.set][i]._id == data.id)
+           {
+             paper[data.set].splice(i,1);
+             console.log('sone')
+           }
+        }
+      }
+    })
+    val.save().then((val) => {
+      console.log("sdf")
+    }).catch((val) => {
+      console.log("sdfsdf")
+    })
+  })
+}
 
   //   console.log(data.language)
   // questionpaper.findOneAndUpdate(
